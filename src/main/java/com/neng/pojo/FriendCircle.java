@@ -33,6 +33,4 @@ public class FriendCircle implements Serializable {
     private User user;
 
 
-
-
 }

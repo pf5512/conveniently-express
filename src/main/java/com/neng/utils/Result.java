@@ -10,8 +10,10 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Result<T> {
+    @Setter
     @Getter
     private int code;//返回码
+    @Setter
     @Getter
     private String msg;//返回信息
     @Setter
@@ -19,8 +21,8 @@ public class Result<T> {
     private T data;//返回数据
 
     public Result<T> api(Api api) {
-        this.code=api.code();
-        this.msg=api.msg();
+        this.code = api.code();
+        this.msg = api.msg();
         return this;
     }
 }

@@ -27,10 +27,10 @@ public class User implements Serializable {
     @Version
     private Integer version;
 
-    @Column(nullable = false,length = 40)
+    @Column(nullable = false, length = 40)
     private String username;//用户名
 
-    @Column(nullable = false,length = 32)
+    @Column(nullable = false, length = 32)
     private String password;//密码
 
     private String sex;
@@ -42,16 +42,4 @@ public class User implements Serializable {
     private String idCardCorrectPic;
     private String idCardOppositePic;
     private Date birthday;
-    private String homeLat;
-    private String homeLng;
-    private String homeAddress;
-    private String workLat;
-    private String workLng;
-    private String workAddress;
-    private String nowLat;
-    private String nowLng;
-
-
-
-
 }
