@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+    datasource:
+      username: root
+      password: 5201314
+      url: jdbc:mysql://127.0.0.1:3306/demo?characterEncoding=utf-8
+      driverClassName: com.mysql.jdbc.Driver
+
+    jpa:
+      show-sql: true
+      properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+      hibernate:
+        ddl-auto: update
+      generate-ddl: true
+
+    resources:
+      static-locations: classpath:/static/
+      cache-period: 0
+
+    thymeleaf:
+      cache: false
+      enabled: true
+      prefix: classpath:/templates/
+      suffix: .html
+      content-type: text/html
+      encoding: UTF-8
+      mode: LEGACYHTML5
+
+
+management:
+  security:
+    enabled: false
+  port: 9000
+  address: 127.0.0.1
+
