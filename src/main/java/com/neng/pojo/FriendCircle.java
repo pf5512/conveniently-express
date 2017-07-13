@@ -22,9 +22,8 @@ public class FriendCircle implements Serializable {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createTime;
 
-
     @Version
-    private Integer version;
+    private int version;
 
     private String content;
 

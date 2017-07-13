@@ -8,6 +8,7 @@ public interface ApiConf {
     String getPoints = "api/v1/getPoint"; //获取位置
     String saveTask = "api/v1/saveTask"; //保存任务
     String getTasks = "api/v1/getTasks"; //获取所有任务
+    String saveHomeAddress = "";
 
 
     //-----------------------------客服相关---------------------------
