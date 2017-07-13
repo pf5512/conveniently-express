@@ -5,6 +5,7 @@ import com.neng.pojo.Order;
 import com.neng.pojo.User;
 import com.neng.pojo.UserBuilder;
 import com.neng.pojo.config.Api;
+import com.neng.pojo.config.Constant;
 import com.neng.repository.UserRepository;
 import com.neng.service.inner.UserService;
 import com.neng.utils.CustomValidator;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 /**
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public ResponseEntity<?> login(String username, String password) {
+    public ResponseEntity<?> login(String username, String password, HttpSession session) {
         if (CustomValidator.hasEmpty(username,password)){
             return RespFactory.INSTANCE().paramsError();
         }
@@ -47,7 +49,7 @@ public class UserServiceImpl implements UserService {
             Result<User> result=new Result<>();
             result.api(Api.SUCCESS);
             result.setData(userData);
-
+            session.setAttribute(Constant.USER_SESSION,userData);
             return new ResponseEntity<>(result,HttpStatus.OK);
         }
     }

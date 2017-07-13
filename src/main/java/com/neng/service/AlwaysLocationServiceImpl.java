@@ -6,6 +6,7 @@ import com.neng.pojo.config.Api;
 import com.neng.repository.AlwaysLocationRepository;
 import com.neng.service.inner.AlwaysLocationService;
 import com.neng.utils.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ *
+ * 用户地址操作类
  * Created by nengneng on 2017/6/6.
  */
 @Service
+@Slf4j
 public class AlwaysLocationServiceImpl implements AlwaysLocationService {
     private AlwaysLocation alwaysLocation;
     private List<AlwaysLocation> alwaysLocations;
@@ -28,20 +32,34 @@ public class AlwaysLocationServiceImpl implements AlwaysLocationService {
         this.alwaysLocationRepository = alwaysLocationRepository;
     }
 
+    /**
+     * 保存更新常用地点
+     * @param lat
+     * @param lng
+     * @param user
+     * @param type
+     * @return
+     */
     @Override
-    public ResponseEntity<?> saveAndFlushAlwaysLocation(String lat, String lng, User user, String type) {
+    public ResponseEntity<?> saveAndFlushAlwaysLocation(String location,String lat, String lng, User user, String type) {
         alwaysLocation = new AlwaysLocation();
         alwaysLocation.setLat(lat);
         alwaysLocation.setLng(lng);
+        alwaysLocation.setLocation(location);
         alwaysLocation.setUser(user);
         alwaysLocation.setType(type);
-        alwaysLocationRepository.saveAndFlush(alwaysLocation);
+        AlwaysLocation alDate = alwaysLocationRepository.saveAndFlush(alwaysLocation);
         Result<AlwaysLocation> result = new Result<AlwaysLocation>();
         result.api(Api.SUCCESS);
-        result.setCode(1);
+        result.setData(alDate);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 获取位置
+     * @param a
+     * @return
+     */
     @Override
     public ResponseEntity<?> getById(AlwaysLocation a) {
         alwaysLocation = alwaysLocationRepository.getOne(a.getId());
@@ -51,6 +69,11 @@ public class AlwaysLocationServiceImpl implements AlwaysLocationService {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 获取所有的地址
+     * @param user
+     * @return
+     */
     @Override
     public ResponseEntity<?> getByUser(User user) {
         alwaysLocations = alwaysLocationRepository.getByUser(user);

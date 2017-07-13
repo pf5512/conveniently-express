@@ -1,6 +1,7 @@
 package com.neng.service.inner;
 
 import com.neng.pojo.Need;
+import com.neng.pojo.User;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -8,9 +9,7 @@ import org.springframework.http.ResponseEntity;
  */
 public interface NeedService {
 
-    ResponseEntity<?> getTasks();
-
-    ResponseEntity<?> save(Need need);//用户注册
+    ResponseEntity<?> getTasks(User user);
 
     ResponseEntity<?> getById(long needId);
 

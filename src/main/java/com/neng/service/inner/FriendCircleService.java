@@ -1,6 +1,7 @@
 package com.neng.service.inner;
 
 import com.neng.pojo.FriendCircle;
+import com.neng.pojo.User;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface FriendCircleService {
 
-    ResponseEntity<?> getFriendCricles();
+    ResponseEntity<?> getFriendCricles(User user);
 
-    ResponseEntity<?> save(FriendCircle friendCircle);
+    ResponseEntity<?> save(User user,FriendCircle friendCircle);
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by nengneng on 2017/6/6.
  */
@@ -35,9 +37,10 @@ public class UserController {
      * @return
      */
     @PostMapping(value = ApiConf.login,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password){
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password, HttpSession session){
         logger.info("登录进来啦***************************");
-        return userService.login(username,password);
+
+        return userService.login(username,password,session);
     }
 
 

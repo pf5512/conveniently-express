@@ -22,14 +22,14 @@ public class Order implements Serializable {
     private long id;//id
 
 
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Temporal(value = TemporalType.DATE)
     private Date createTime;
 
     @Version
     private int version;
 
     private String number;
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Temporal(value = TemporalType.DATE)
     private Date tradeTime;
 
     private Long needId;
@@ -40,7 +40,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "order")
     private Set<OrderItems> orderItems = new HashSet<>();//订单项目集合
 
     private Need need;

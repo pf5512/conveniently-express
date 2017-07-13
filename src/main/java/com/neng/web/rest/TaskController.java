@@ -2,6 +2,7 @@ package com.neng.web.rest;
 
 import com.neng.config.ApiConf;
 import com.neng.pojo.Need;
+import com.neng.pojo.User;
 import com.neng.service.inner.NeedService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,13 +34,15 @@ public class TaskController {
     @PostMapping(value = ApiConf.saveTask,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> saveTask(Need need){
         logger.info("need***************************");
-        return needService.save(need);
+        User user = new User();
+        return needService.saveAndFlushNeed(need);
     }
 
     @GetMapping(value = ApiConf.getTasks,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> getTasks(){
         logger.info("get tasks***************************");
-        return needService.getTasks();
+        User user = new User();
+        return needService.getTasks(user);
     }
 
 

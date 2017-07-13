@@ -22,13 +22,13 @@ public class OrderItems implements Serializable {
     private long id;//id
 
 
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Temporal(value = TemporalType.DATE)
     private Date createTime;
 
     @Version
     private int version;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Temporal(value = TemporalType.DATE)
     private Date tradeTime;
 
     private String detailName;

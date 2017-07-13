@@ -19,7 +19,8 @@ public class Need implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;//id
 
-    @Temporal(value = TemporalType.TIMESTAMP)
+
+    @Temporal(value = TemporalType.DATE)
     private Date createTime;
 
     @Version

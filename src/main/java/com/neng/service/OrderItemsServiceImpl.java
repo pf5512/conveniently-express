@@ -21,6 +21,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class OrderItemsServiceImpl implements OrderItemsService {
+
     private OrderItems orderItems;
 
     private List<OrderItems> orderItemss;
@@ -32,30 +33,13 @@ public class OrderItemsServiceImpl implements OrderItemsService {
         this.orderItemsRepository = orderItemsRepository;
     }
 
-    @Override
-    public ResponseEntity<?> getOrderItems() {
-        orderItemss = orderItemsRepository.findAll();
-        Result<List<OrderItems>> result = new Result<>();
-        result.api(Api.SUCCESS);
-        result.setData(orderItemss);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
 
-    @Override
-    public ResponseEntity<?> save(OrderItems orderItems) {
-        orderItemsRepository.save(orderItems);
-        Result<OrderItems> result = new Result<>();
-        result.api(Api.SUCCESS);
-        result.setCode(1);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
 
     @Override
     public ResponseEntity<?> saveAndFlush(OrderItems orderItems) {
         orderItemsRepository.saveAndFlush(orderItems);
         Result<OrderItems> result = new Result<>();
         result.api(Api.SUCCESS);
-        result.setCode(1);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

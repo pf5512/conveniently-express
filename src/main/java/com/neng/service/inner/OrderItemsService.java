@@ -10,9 +10,6 @@ import org.springframework.http.ResponseEntity;
  */
 public interface OrderItemsService {
 
-    ResponseEntity<?> getOrderItems();
-
-    ResponseEntity<?> save(OrderItems orderItems);
 
     ResponseEntity<?> saveAndFlush(OrderItems orderItems);
 

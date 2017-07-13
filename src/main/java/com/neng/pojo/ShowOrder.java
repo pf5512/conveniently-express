@@ -20,7 +20,7 @@ public class ShowOrder implements Serializable {
     private long id;//id
 
 
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Temporal(value = TemporalType.DATE)
     private Date createTime;
 
     @Version

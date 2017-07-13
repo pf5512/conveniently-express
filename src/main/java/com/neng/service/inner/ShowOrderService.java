@@ -2,6 +2,7 @@ package com.neng.service.inner;
 
 import com.neng.pojo.Order;
 import com.neng.pojo.ShowOrder;
+import com.neng.pojo.User;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
  */
 public interface ShowOrderService {
 
-    ResponseEntity<?> getShowOrders();
+    ResponseEntity<?> getShowOrders(User user);
 
-    ResponseEntity<?> save(ShowOrder showOrder);
+    ResponseEntity<?> save(User user,ShowOrder showOrder);
 }

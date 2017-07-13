@@ -5,5 +5,5 @@ package com.neng.pojo.config;
  */
 public class Constant {
 
-    private static final String USER_SESSION = "user";
+    public static final String USER_SESSION = "user";
 }
