@@ -22,19 +22,18 @@ public class AlwaysLocation implements Serializable {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createTime;
 
-
     @Version
     private Integer version;
 
     private String location;
+
+    private String lat;
+
+    private String lng;
 
     private String type;
 
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_id")
     private User user;
-
-
-
-
 }

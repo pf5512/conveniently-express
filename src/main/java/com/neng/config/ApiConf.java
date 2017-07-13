@@ -2,14 +2,14 @@ package com.neng.config;
 
 public interface ApiConf {
 
-    //-----------------------------ÓÃ»§Ïà¹Ø---------------------------
-    String login="api/v1/login";//ÓÃ»§µÇÂ¼+
-    String register="api/v1/register";//ÓÃ»§×¢²á+
-    String getPoints = "api/v1/getPoint"; //»ñÈ¡Î»ÖÃ
-    String saveTask = "api/v1/saveTask"; //±£´æÈÎÎñ
-    String getTasks = "api/v1/getTasks"; //»ñÈ¡ËùÓĞÈÎÎñ
+    //-----------------------------ç”¨æˆ·ç›¸å…³---------------------------
+    String login="api/v1/login";//ç”¨æˆ·ç™»å½•+
+    String register="api/v1/register";//ç”¨æˆ·æ³¨å†Œ+
+    String getPoints = "api/v1/getPoint"; //è·å–ä½ç½®
+    String saveTask = "api/v1/saveTask"; //ä¿å­˜ä»»åŠ¡
+    String getTasks = "api/v1/getTasks"; //è·å–æ‰€æœ‰ä»»åŠ¡
 
 
-    //-----------------------------¿Í·şÏà¹Ø---------------------------
-    String getMessage = "api/v1/getMessage"; //»ñÈ¡ËùÓĞÈÎÎñ
+    //-----------------------------å®¢æœç›¸å…³---------------------------
+    String getMessage = "api/v1/getMessage"; //è·å–æ‰€æœ‰ä»»åŠ¡
 }
