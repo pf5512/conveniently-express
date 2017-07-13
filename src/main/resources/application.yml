@@ -4,8 +4,8 @@ server:
 spring:
     datasource:
       username: root
-      password: 5201314
-      url: jdbc:mysql://127.0.0.1:3306/demo?characterEncoding=utf-8
+      password: upic1234
+      url: jdbc:mysql://115.159.193.237:3306/demo?characterEncoding=utf-8
       driverClassName: com.mysql.jdbc.Driver
 
     jpa:
