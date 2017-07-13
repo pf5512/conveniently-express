@@ -36,8 +36,6 @@ public class Order implements Serializable {
 
     private Double allPrice;
 
-//    private Long alwaysLocationId;
-
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_id")
     private User user;
@@ -46,6 +44,4 @@ public class Order implements Serializable {
     private Set<OrderItems> orderItems = new HashSet<>();//订单项目集合
 
     private Need need;
-
-
 }

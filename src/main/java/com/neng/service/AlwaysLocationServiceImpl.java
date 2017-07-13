@@ -19,6 +19,7 @@ import java.util.List;
 @Service
 public class AlwaysLocationServiceImpl implements AlwaysLocationService {
     private AlwaysLocation alwaysLocation;
+    private List<AlwaysLocation> alwaysLocations;
 
     private AlwaysLocationRepository alwaysLocationRepository;
 
@@ -29,6 +30,7 @@ public class AlwaysLocationServiceImpl implements AlwaysLocationService {
 
     @Override
     public ResponseEntity<?> saveAndFlushAlwaysLocation(String lat, String lng, User user, String type) {
+        alwaysLocation = new AlwaysLocation();
         alwaysLocation.setLat(lat);
         alwaysLocation.setLng(lng);
         alwaysLocation.setUser(user);
@@ -49,5 +51,12 @@ public class AlwaysLocationServiceImpl implements AlwaysLocationService {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-
+    @Override
+    public ResponseEntity<?> getByUser(User user) {
+        alwaysLocations = alwaysLocationRepository.getByUser(user);
+        Result<List<AlwaysLocation>> result = new Result<List<AlwaysLocation>>();
+        result.api(Api.SUCCESS);
+        result.setData(alwaysLocations);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

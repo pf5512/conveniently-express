@@ -34,15 +34,12 @@ public class OrderItems implements Serializable {
     private String detailName;
 
     private Double detailPrice;
-//    private Long orderId;
-//    private Long needId;
+
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = Order.class)
     @JoinColumn(name = "order_id")
     private Order order;
 
     private Need need;
-
-
 
 
 }

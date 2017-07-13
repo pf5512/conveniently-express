@@ -18,30 +18,48 @@ import java.util.List;
  */
 @Service
 public class NeedServiceImpl implements NeedService {
+    private Need need;
 
     private NeedRepository needRepository;
 
     @Autowired
-    public NeedServiceImpl(NeedRepository needRepository){
+    public NeedServiceImpl(NeedRepository needRepository) {
         this.needRepository = needRepository;
     }
-
 
     @Override
     public ResponseEntity<?> getTasks() {
         List<Need> needs = needRepository.findAll();
-        Result<List<Need>> result=new Result<>();
+        Result<List<Need>> result = new Result<>();
         result.api(Api.SUCCESS);
         result.setData(needs);
-        return new ResponseEntity<>(result,HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<?> save(Need need) {
         Need needDate = needRepository.save(need);
-        Result<Need> result=new Result<>();
+        Result<Need> result = new Result<>();
         result.api(Api.SUCCESS);
-        result.setData(needDate);
-        return new ResponseEntity<>(result,HttpStatus.OK);
+        result.setCode(1);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> getById(long needId) {
+        need = needRepository.getOne(needId);
+        Result<Need> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(need);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> saveAndFlushNeed(Need need) {
+        needRepository.saveAndFlush(need);
+        Result<Need> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setCode(1);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
