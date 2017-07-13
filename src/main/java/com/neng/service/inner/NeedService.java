@@ -12,4 +12,7 @@ public interface NeedService {
 
     ResponseEntity<?> save(Need need);//用户注册
 
+    ResponseEntity<?> getById(long needId);
+
+    ResponseEntity<?> saveAndFlushNeed(Need need);
 }

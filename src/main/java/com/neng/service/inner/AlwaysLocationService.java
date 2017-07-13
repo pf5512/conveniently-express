@@ -11,4 +11,6 @@ public interface AlwaysLocationService {
     ResponseEntity<?> saveAndFlushAlwaysLocation(String lat, String lng, User user, String type);
 
     ResponseEntity<?> getById(AlwaysLocation alwaysLocation);
+
+    ResponseEntity<?> getByUser(User user);
 }
