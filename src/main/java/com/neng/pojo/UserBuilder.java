@@ -22,7 +22,4 @@ public class UserBuilder extends User {
     public UserBuilder build() {
         return this;
     }
-
-
-
 }

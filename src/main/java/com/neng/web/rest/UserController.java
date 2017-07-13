@@ -1,7 +1,6 @@
 package com.neng.web.rest;
 
 import com.neng.config.ApiConf;
-//import com.neng.service.InitServiceImpl;
 import com.neng.service.inner.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

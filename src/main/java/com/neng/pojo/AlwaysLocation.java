@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nengneng on 2017/6/5.
@@ -23,7 +24,7 @@ public class AlwaysLocation implements Serializable {
     private Date createTime;
 
     @Version
-    private Integer version;
+    private int version;
 
     private String location;
 

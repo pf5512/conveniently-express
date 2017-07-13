@@ -25,7 +25,7 @@ public class User implements Serializable {
 
 
     @Version
-    private Integer version;
+    private int version;
 
     @Column(nullable = false, length = 40)
     private String username;//用户名

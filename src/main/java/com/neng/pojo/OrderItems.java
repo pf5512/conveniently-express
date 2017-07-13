@@ -26,7 +26,7 @@ public class OrderItems implements Serializable {
     private Date createTime;
 
     @Version
-    private Integer version;
+    private int version;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date tradeTime;
