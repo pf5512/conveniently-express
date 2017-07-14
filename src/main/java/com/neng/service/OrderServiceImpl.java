@@ -7,6 +7,7 @@ import com.neng.pojo.User;
 import com.neng.pojo.config.Api;
 import com.neng.repository.OrderItemsRepository;
 import com.neng.repository.OrderRepository;
+import com.neng.repository.UserRepository;
 import com.neng.service.inner.OrderService;
 import com.neng.utils.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -33,12 +34,15 @@ public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
     private OrderItemsRepository orderItemsRepository;
+    private UserRepository userRepository;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository,
-                            OrderItemsRepository orderItemsRepository) {
+                            OrderItemsRepository orderItemsRepository,
+                            UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.orderItemsRepository = orderItemsRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -63,8 +67,8 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public ResponseEntity<?> saveAndFlushOrder(User user,Order order, Set<OrderItems> orderItems) {
-        saveOrderItems(user,order, orderItems);
+    public ResponseEntity<?> saveAndFlushOrder(Long userId,Order order, Set<OrderItems> orderItems) {
+        saveOrderItems(userId,order, orderItems);
         Result<Order> result = new Result<>();
         result.api(Api.SUCCESS);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -107,8 +111,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    private void saveOrderItems(User user,Order order, Set<OrderItems> orderItems) {
+    private void saveOrderItems(Long userId,Order order, Set<OrderItems> orderItems) {
 
+        User user = userRepository.findOne(userId);
         order.setOrderItems(orderItems);
         order.setUser(user);
         Order o = orderRepository.save(order);
@@ -118,7 +123,6 @@ public class OrderServiceImpl implements OrderService {
             orderI.setCreateTime(new Date());
             orderI.setTradeTime(new Date());
             orderItemsRepository.saveAndFlush(orderI);
-
         }
 
     }
