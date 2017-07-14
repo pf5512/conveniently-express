@@ -22,4 +22,6 @@ public interface OrderService {
     ResponseEntity<?> getByNeed(Need need);
 
     ResponseEntity<?> getByNumber(String number);
+
+    ResponseEntity<?> delete(Order order);
 }
