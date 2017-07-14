@@ -3,7 +3,7 @@ package com.neng.pojo;
 /**
  * Created by nengneng on 2017/7/13.
  */
-public class UserBuilder extends User {
+public class UserBuilder{
 
     private final User user=new User();
 
