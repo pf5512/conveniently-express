@@ -5,21 +5,21 @@ package com.neng.pojo;
  */
 public class UserBuilder extends User {
 
-    private String username;
+    private final User user=new User();
 
-    private String password;
 
-    public UserBuilder username(String username) {
-        this.username = username;
+    public UserBuilder username(final String username){
+        user.setUsername(username);
         return this;
     }
 
-    public UserBuilder password(String usepasswordrname) {
-        this.password = password;
+    public UserBuilder password(final String password){
+        user.setPassword(password);
         return this;
     }
 
-    public UserBuilder build() {
-        return this;
+
+    public User build(){
+        return this.user;
     }
 }

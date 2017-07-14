@@ -94,6 +94,12 @@ public class NeedController {
     }
 
 
+    /**
+     * 删除用户需求
+     * @param userId
+     * @param needId
+     * @return
+     */
     @DeleteMapping(value = ApiConf.deleteNeed,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteNeed(Long userId, Long needId) {
         logger.info("delete need by user");

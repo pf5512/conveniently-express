@@ -10,7 +10,11 @@ import org.springframework.http.ResponseEntity;
 
 public interface FriendCircleService {
 
-    ResponseEntity<?> getFriendCricles(User user);
+    ResponseEntity<?> getFriendCricles();
 
-    ResponseEntity<?> save(User user,FriendCircle friendCircle);
+    ResponseEntity<?> getFriendCriclesByUser(Long userId);
+
+    ResponseEntity<?> save(Long userId,FriendCircle friendCircle);
+
+    ResponseEntity<?> deleteFriend(Long userId, Long friendId);
 }
