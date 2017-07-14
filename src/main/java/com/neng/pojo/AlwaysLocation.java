@@ -1,6 +1,8 @@
 package com.neng.pojo;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +22,7 @@ public class AlwaysLocation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;//id
 
-    @Temporal(value = TemporalType.DATE)
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date createTime;
 
     @Version
