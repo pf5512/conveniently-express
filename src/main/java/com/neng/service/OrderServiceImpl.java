@@ -110,6 +110,14 @@ public class OrderServiceImpl implements OrderService {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<?> delete(Order order) {
+        orderRepository.delete(order.getId());
+        Result<Order> result = new Result<>();
+        result.api(Api.SUCCESS);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @Transactional
     private void saveOrderItems(Long userId,Order order, Set<OrderItems> orderItems) {
 

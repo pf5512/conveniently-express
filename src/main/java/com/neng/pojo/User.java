@@ -25,11 +25,11 @@ public class User implements Serializable {
     private long id;//id
 
     @Temporal(value = TemporalType.DATE)
-    private Date createTime;
+    private Date createTime;//创建时间
 
 
     @Version
-    private int version;
+    private int version;//版本号
 
     @Column(nullable = false, length = 40)
     private String username;//用户名
@@ -37,14 +37,14 @@ public class User implements Serializable {
     @Column(nullable = false, length = 32)
     private String password;//密码
 
-    private String sex;
-    private String phone;
-    private String address;
-    private String headPic;
-    private String realName;
-    private String type;
-    private String idCardCorrectPic;
-    private String idCardOppositePic;
-    private Date birthday;
+    private String sex;//性别
+    private String phone;//手机号
+    private String address;//地址
+    private String headPic;//头像
+    private String realName;//真实姓名
+    private String type;//类型（暂时没有作用）
+    private String idCardCorrectPic;//身份证正面照
+    private String idCardOppositePic;//身份证反面照
+    private Date birthday;//生日
 
 }

@@ -29,7 +29,8 @@ public interface ApiConf {
     //-----------------------------ShowOrderController---------------------------
     String saveShowOrder = "api/v1/saveShowOrder"; //保存晒单
     String getShowOrders = "api/v1/getShowOrders"; //获取所有的晒单
-    String getShowOrderByUser = "api/v1/getShowOrderByUser"; //获取用户的晒单数据
+    String getShowOrderByBuyerId = "api/v1/getShowOrderByBuyerId"; //获取用户的晒单数据
+    String getShowOrderBySalerId = "api/v1/getShowOrderBySalerId"; //获取用户的晒单数据
     String deleteShowOrder = "api/v1/deleteShowOrder"; // 删除晒单数据
 
 

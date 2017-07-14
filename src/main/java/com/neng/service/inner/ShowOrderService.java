@@ -9,8 +9,13 @@ import org.springframework.http.ResponseEntity;
  * Created by nengneng on 2017/7/13.
  */
 public interface ShowOrderService {
+    ResponseEntity<?> getByBuyerId(long buyerId);
 
-    ResponseEntity<?> getShowOrders(User user);
+    ResponseEntity<?> getBySalerId(long salerId);
 
-    ResponseEntity<?> save(User user,ShowOrder showOrder);
+    ResponseEntity<?> deleteShowOrder(ShowOrder showOrder);
+
+    ResponseEntity<?> save(ShowOrder showOrder);
+
+    ResponseEntity<?> getAll();
 }

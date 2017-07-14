@@ -23,21 +23,21 @@ public class OrderItems implements Serializable {
 
 
     @Temporal(value = TemporalType.DATE)
-    private Date createTime;
+    private Date createTime;//创建时间
 
     @Version
-    private int version;
+    private int version;//版本号
 
     @Temporal(value = TemporalType.DATE)
-    private Date tradeTime;
+    private Date tradeTime;//交易时间
 
-    private String detailName;
+    private String detailName;//单项名称
 
-    private Double detailPrice;
+    private Double detailPrice;//单项价格
 
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = Order.class)
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Order order;//订单
 
 
 

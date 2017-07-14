@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface ShowOrderRepository extends JpaRepository<ShowOrder, Long> {
+    List<ShowOrder> getByBuyerId(long buyerId);
 
-    List<ShowOrder> findByUser(User user);
+    List<ShowOrder> getBySalerId(long salerId);
 }

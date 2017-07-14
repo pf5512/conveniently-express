@@ -21,29 +21,35 @@ public class ShowOrder implements Serializable {
 
 
     @Temporal(value = TemporalType.DATE)
-    private Date createTime;
+    private Date createTime;//创建时间
 
     @Version
-    private int version;
+    private int version;//版本号
 
-    private String goodName;
-    private String goodPic;
-    private String goodHeight;
-    private String startLat;
-    private String startLng;
-    private String endLat;
-    private String endLng;
-    private String limitTime;
-    private String status;
-    private Long alwaysLocationId;
-    private String content;
-    private Double money;
-    private Order order;
-
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-
-
+    private String goodName;//商品名称
+    private String goodPic;//商品图片
+    private String goodHeight;//商品重量
+    private String startLat;//开始纬度
+    private String startLng;//开始经度
+    private String endLat;//结束纬度
+    private String endLng;//结束经度
+    private String limitTime;//限制时间
+    private String status;//状态
+    private Long alwaysLocationId;//常用地点ID
+    private String content;//文本
+    private Double money;//佣金
+    private long needId;//需求ID
+    private long orderId;//订单ID
+    private long buyerId;//买家ID
+    private String buyerUsername;//买家用户名
+    private String buyerSex;//买家性别
+    private String buyerPhone;//买家手机号
+    private String buyerAddress;//买家地址
+    private String buyerHeadPic;//买家头像
+    private long salerId;//卖家ID
+    private String salerUsername;//卖家用户名
+    private String salerSex;//卖家性别
+    private String salerPhone;//卖家手机号
+    private String salerAddress;//卖家地址
+    private String salerHeadPic;//卖家头像
 }

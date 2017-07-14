@@ -29,31 +29,73 @@ public class ShowOrderServiceImpl implements ShowOrderService {
     }
 
     /**
-     * 获取用户的所有晒单
-     * @param user
-     * @return
-     */
-    @Override
-    public ResponseEntity<?> getShowOrders(User user) {
-        List<ShowOrder> showOrders = showOrderRepository.findByUser(user);
-        Result<List<ShowOrder>> result = new Result<List<ShowOrder>>();
-        result.api(Api.SUCCESS);
-        result.setData(showOrders);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-
-    }
-
-    /**
      * 保存用户的晒单
-     * @param user
+     *
      * @param showOrder
      * @return
      */
     @Override
-    public ResponseEntity<?> save(User user, ShowOrder showOrder) {
-        showOrder.setUser(user);
+    public ResponseEntity<?> save(ShowOrder showOrder) {
         showOrderRepository.save(showOrder);
         Result<ShowOrder> result = new Result<ShowOrder>();
+        result.api(Api.SUCCESS);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    /**
+     * 获取所有晒单
+     *
+     * @return
+     */
+    @Override
+    public ResponseEntity<?> getAll() {
+        List<ShowOrder> showOrders = showOrderRepository.findAll();
+        Result<List<ShowOrder>> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(showOrders);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    /**
+     * 获取买家晒单
+     *
+     * @param buyerId
+     * @return
+     */
+    @Override
+    public ResponseEntity<?> getByBuyerId(long buyerId) {
+        List<ShowOrder> showOrders = showOrderRepository.getByBuyerId(buyerId);
+        Result<List<ShowOrder>> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(showOrders);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    /**
+     * 获取买家晒单
+     *
+     * @param salerId
+     * @return
+     */
+    @Override
+    public ResponseEntity<?> getBySalerId(long salerId) {
+        List<ShowOrder> showOrders = showOrderRepository.getBySalerId(salerId);
+        Result<List<ShowOrder>> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(showOrders);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    /**
+     * 删除单个晒单
+     *
+     * @param showOrder
+     * @return
+     */
+    @Override
+    public ResponseEntity<?> deleteShowOrder(ShowOrder showOrder) {
+        showOrderRepository.delete(showOrder.getId());
+        Result<ShowOrder> result = new Result<>();
         result.api(Api.SUCCESS);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

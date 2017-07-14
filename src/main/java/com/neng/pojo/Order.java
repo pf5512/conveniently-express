@@ -23,27 +23,27 @@ public class Order implements Serializable {
 
 
     @Temporal(value = TemporalType.DATE)
-    private Date createTime;
+    private Date createTime;//创建时间
 
     @Version
-    private int version;
+    private int version;//版本号
 
-    private String number;
+    private String number;//订单编号
     @Temporal(value = TemporalType.DATE)
-    private Date tradeTime;
+    private Date tradeTime;//交易时间
 
 
-    private Double allPrice;
+    private Double allPrice;//总价格
 
     /**
      * 接受订单的User
      */
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user;//用户
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "order")
     private Set<OrderItems> orderItems = new HashSet<>();//订单项目集合
 
-    private Need need;
+    private Need need;//需求
 }
