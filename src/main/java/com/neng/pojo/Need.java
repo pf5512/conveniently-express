@@ -36,19 +36,14 @@ public class Need implements Serializable {
     private String endLat;
     private String endLng;
     private String limitTime;
-    private Long clientId;
-    private String clientTime;
-    private String cilentPhone;
-    private String clientHeadPic;
-    private Long principalId;
-    private String principalName;
-    private String principalPhone;
-    private String principalHeadPic;
     private String status;
     private Long alwaysLocationId;
     private String content;
     private Double money;
 
+    /**
+     * 发布的User
+     */
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_id")
     private User user;

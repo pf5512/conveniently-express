@@ -66,12 +66,10 @@ public class UserServiceImpl implements UserService {
         }else if (userRepository.countByUsername(username)>0){
             return new ResponseEntity<>(new Result<String>().api(Api.USER_NAME_EXIST),HttpStatus.OK);
         }else {
-            User user=userRepository.save(
-                    new UserBuilder()
-                            .username(username)
-                            .password(password)
-                            .build()
-            );
+            User u = new User();
+            u.setUsername(username);
+            u.setPassword(password);
+            User user=userRepository.save(u);
 
             if (user==null || user.getId()== 0){
                 throw new UserUpdateException();

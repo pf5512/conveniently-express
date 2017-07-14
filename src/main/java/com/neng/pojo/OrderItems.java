@@ -39,7 +39,6 @@ public class OrderItems implements Serializable {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private Need need;
 
 
 }

@@ -178,7 +178,6 @@ public class NeedServiceImpl implements NeedService {
             needRepository.delete(n);
             Result<Need> result = new Result<>();
             result.api(Api.SUCCESS);
-            result.setData(need);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }else{
             Result<Need> result = new Result<>();

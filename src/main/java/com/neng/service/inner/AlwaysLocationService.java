@@ -14,5 +14,11 @@ public interface AlwaysLocationService {
 
     ResponseEntity<?> getByUser(User user);
 
-    ResponseEntity<?> save(AlwaysLocation alwaysLocation);
+    ResponseEntity<?> save(Long userId,AlwaysLocation alwaysLocation);
+
+    ResponseEntity<?> getHomeAddresses(Long userId);
+
+    ResponseEntity<?> updateHomeAddress(Long alocationId, AlwaysLocation alwaysLocation);
+
+    ResponseEntity<?> deleteAAddress(Long userId, Long addressId);
 }

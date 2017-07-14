@@ -32,10 +32,12 @@ public class Order implements Serializable {
     @Temporal(value = TemporalType.DATE)
     private Date tradeTime;
 
-    private Long needId;
 
     private Double allPrice;
 
+    /**
+     * 接受订单的User
+     */
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_id")
     private User user;

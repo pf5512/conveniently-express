@@ -40,25 +40,36 @@ public class NengApplicationTests {
     public void contextLoads() {
     }
 
-    /**
-     * 根据用户ID查找需求
-     */
     @Test
     public void findNeedByUserId() {
+//		List<Need> needs = needRepository.findByUserId(1L);
+//		User user = new User();
+//		user.setUsername("maneng");
+//		user.setPassword("123");
+//		User u = userRepository.save(user);
         User u = userRepository.findOne(1L);
         List<Need> needs = needRepository.findByUser(u);
         Assert.assertEquals(3, needs.size());
+//		Assert.assertNotNull(u);
+
+//		Assert.assertNotNull(needs);
     }
 
-    /**
-     * 根据用户ID查找位置
-     */
     @Test
     public void findLocationByUserId() {
+//		List<Need> needs = needRepository.findByUserId(1L);
+//		User user = new User();
+//		user.setUsername("maneng");
+//		user.setPassword("123");
+//		User u = userRepository.save(user);
         User u = userRepository.findOne(1L);
         List<AlwaysLocation> alwaysLocations = alwaysLocationRepository.getByUser(u);
         Assert.assertEquals(2, alwaysLocations.size());
+//		Assert.assertNotNull(u);
+
+//		Assert.assertNotNull(needs);
     }
+
 
     /**
      * 测试保存订单
@@ -74,6 +85,7 @@ public class NengApplicationTests {
         orderItemsAll.add(orderItems1);
         orderItemsAll.add(orderItems2);
 
+
         Order order = new Order();
         order.setAllPrice(1100.00);
         order.setOrderItems(orderItemsAll);
@@ -84,6 +96,10 @@ public class NengApplicationTests {
         orderItemsRepository.saveAndFlush(orderItems1);
         orderItemsRepository.saveAndFlush(orderItems2);
         Assert.assertEquals(2, order1.getOrderItems().size());
+
+
+//        }
+
     }
 
     @Test
@@ -93,9 +109,7 @@ public class NengApplicationTests {
         Assert.assertEquals(7, alwaysLocations.size());
     }
 
-    /**
-     * 保存常用地点
-     */
+
     @Test
     public void saveAndFlushAlwaysLocation() {
         String location = "浙江省";
@@ -114,8 +128,21 @@ public class NengApplicationTests {
         alwaysLocationService.save(alwaysLocation);
     }
 
+
     @Test
     public void getById() {
         AlwaysLocation alwaysLocation = alwaysLocationRepository.getOne(Long.valueOf(7));
     }
+
+    @Test
+    public void saveUser() {
+        User u = new User();
+        u.setPassword("15151");
+        u.setUsername("f4sdaf45s");
+        User save = userRepository.save(u);
+
+        Assert.assertNotNull(save);
+
+    }
+
 }
