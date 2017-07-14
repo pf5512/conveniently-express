@@ -8,9 +8,11 @@ import org.springframework.http.ResponseEntity;
  * Created by nengneng on 2017/6/6.
  */
 public interface AlwaysLocationService {
-    ResponseEntity<?> saveAndFlushAlwaysLocation(String location,String lat, String lng, User user, String type);
+    ResponseEntity<?> saveAndFlushAlwaysLocation(AlwaysLocation alwaysLocation);
 
     ResponseEntity<?> getById(AlwaysLocation alwaysLocation);
 
     ResponseEntity<?> getByUser(User user);
+
+    ResponseEntity<?> save(AlwaysLocation alwaysLocation);
 }

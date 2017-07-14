@@ -12,10 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
- *
  * 用户地址操作类
  * Created by nengneng on 2017/6/6.
  */
@@ -34,20 +34,11 @@ public class AlwaysLocationServiceImpl implements AlwaysLocationService {
 
     /**
      * 保存更新常用地点
-     * @param lat
-     * @param lng
-     * @param user
-     * @param type
+     * @param alwaysLocation
      * @return
      */
     @Override
-    public ResponseEntity<?> saveAndFlushAlwaysLocation(String location,String lat, String lng, User user, String type) {
-        alwaysLocation = new AlwaysLocation();
-        alwaysLocation.setLat(lat);
-        alwaysLocation.setLng(lng);
-        alwaysLocation.setLocation(location);
-        alwaysLocation.setUser(user);
-        alwaysLocation.setType(type);
+    public ResponseEntity<?> saveAndFlushAlwaysLocation(AlwaysLocation alwaysLocation) {
         AlwaysLocation alDate = alwaysLocationRepository.saveAndFlush(alwaysLocation);
         Result<AlwaysLocation> result = new Result<AlwaysLocation>();
         result.api(Api.SUCCESS);
@@ -57,6 +48,7 @@ public class AlwaysLocationServiceImpl implements AlwaysLocationService {
 
     /**
      * 获取位置
+     *
      * @param a
      * @return
      */
@@ -71,6 +63,7 @@ public class AlwaysLocationServiceImpl implements AlwaysLocationService {
 
     /**
      * 获取所有的地址
+     *
      * @param user
      * @return
      */
@@ -80,6 +73,22 @@ public class AlwaysLocationServiceImpl implements AlwaysLocationService {
         Result<List<AlwaysLocation>> result = new Result<List<AlwaysLocation>>();
         result.api(Api.SUCCESS);
         result.setData(alwaysLocations);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    /**
+     * 保存地址
+     *
+     * @param alwaysLocation
+     * @return
+     */
+    @Override
+    public ResponseEntity<?> save(AlwaysLocation alwaysLocation) {
+        alwaysLocation.setCreateTime(new Date());
+        AlwaysLocation alDate = alwaysLocationRepository.save(alwaysLocation);
+        Result<AlwaysLocation> result = new Result<AlwaysLocation>();
+        result.api(Api.SUCCESS);
+        result.setData(alDate);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
