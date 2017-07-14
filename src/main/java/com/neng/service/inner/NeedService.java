@@ -9,9 +9,18 @@ import org.springframework.http.ResponseEntity;
  */
 public interface NeedService {
 
-    ResponseEntity<?> getTasks(User user);
 
     ResponseEntity<?> getById(long needId);
 
-    ResponseEntity<?> saveAndFlushNeed(Need need);
+    ResponseEntity<?> saveAndFlushNeed(Long userId,Need need);
+
+    ResponseEntity<?> getNeeds();
+
+    ResponseEntity<?> getNeedsByUser(Long userId);
+
+    ResponseEntity<?> getNeed(Long needId);
+
+    ResponseEntity<?> updateNeed(Long userId, Need need, Long needId);
+
+    ResponseEntity<?> deleteNeed(Long userId, Long needId);
 }

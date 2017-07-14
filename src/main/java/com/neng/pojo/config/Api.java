@@ -12,7 +12,8 @@ public enum Api {
     USER_OLD_PASS_ERR(205,"原密码错误"),
     USER_MSG_LATEST(206,"消息数据已经最新"),
     NO_USERS(207,"没有用户"),
-    PARMETER_NOT_EXIT(208,"参数不存在");
+    PARMETER_NOT_EXIT(208,"参数不存在"),
+    NO_PERMISSION(209,"没有权限");
 
     private int code;
     private String msg;
