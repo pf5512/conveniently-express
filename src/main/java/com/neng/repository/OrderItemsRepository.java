@@ -14,7 +14,5 @@ import java.util.List;
 @Repository
 public interface OrderItemsRepository extends JpaRepository<OrderItems, Long> {
 
-    List<OrderItems> getByNeed(Need need);
-
     List<OrderItems> getByOrder(Order order);
 }

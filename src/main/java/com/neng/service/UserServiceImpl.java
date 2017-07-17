@@ -28,29 +28,29 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public  UserServiceImpl(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
 
     @Override
     public ResponseEntity<?> login(String username, String password, HttpSession session) {
-        if (CustomValidator.hasEmpty(username,password)){
+        if (CustomValidator.hasEmpty(username, password)) {
             return RespFactory.INSTANCE().paramsError();
         }
-        Optional<User> user=userRepository.findByUsernameAndPassword(username,password);
-        if (!user.isPresent()){
-            if (userRepository.countByUsername(username)<1){
+        Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
+        if (!user.isPresent()) {
+            if (userRepository.countByUsername(username) < 1) {
                 return new ResponseEntity<>(new Result<String>().api(Api.USER_NOT_EXIST), HttpStatus.OK);
             }
-            return new ResponseEntity<>(new Result<String>().api(Api.USER_PASS_ERR),HttpStatus.OK);
-        }else {
-            User userData=user.get();
-            Result<User> result=new Result<>();
+            return new ResponseEntity<>(new Result<String>().api(Api.USER_PASS_ERR), HttpStatus.OK);
+        } else {
+            User userData = user.get();
+            Result<User> result = new Result<>();
             result.api(Api.SUCCESS);
             result.setData(userData);
-            session.setAttribute(Constant.USER_SESSION,userData);
-            return new ResponseEntity<>(result,HttpStatus.OK);
+            session.setAttribute(Constant.USER_SESSION, userData);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
     }
 
@@ -60,25 +60,41 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<?> register(String username, String password){
-        if (CustomValidator.hasEmpty(username,password)){
+    public ResponseEntity<?> register(String username, String password) {
+        if (CustomValidator.hasEmpty(username, password)) {
             return RespFactory.INSTANCE().paramsError();
-        }else if (userRepository.countByUsername(username)>0){
-            return new ResponseEntity<>(new Result<String>().api(Api.USER_NAME_EXIST),HttpStatus.OK);
-        }else {
+        } else if (userRepository.countByUsername(username) > 0) {
+            return new ResponseEntity<>(new Result<String>().api(Api.USER_NAME_EXIST), HttpStatus.OK);
+        } else {
             User u = new User();
             u.setUsername(username);
             u.setPassword(password);
-            User user=userRepository.save(u);
+            User user = userRepository.save(u);
 
-            if (user==null || user.getId()== 0){
+            if (user == null || user.getId() == 0) {
                 throw new UserUpdateException();
             }
 
-            Result<User> result=new Result<>();
+            Result<User> result = new Result<>();
             result.api(Api.SUCCESS);
             result.setData(user);
-            return new ResponseEntity<>(result,HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
+    }
+
+    @Override
+    public int getUserNumber() {
+        int userNum = userRepository.findAll().size();
+        return userNum;
+    }
+
+    @Override
+    public User getOne(long userId) {
+        return userRepository.getOne(userId);
+    }
+
+    @Override
+    public User saveAndFlush(User user) {
+        return userRepository.saveAndFlush(user);
     }
 }

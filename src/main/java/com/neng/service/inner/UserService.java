@@ -12,11 +12,15 @@ import javax.servlet.http.HttpSession;
  */
 public interface UserService {
 
-    ResponseEntity<?> login(String username, String password, HttpSession session);//用户登录
+    ResponseEntity<?> login(String username, String password, HttpSession session); //用户登录
 
-    ResponseEntity<?> auth(String username,String password);//获取token
+    ResponseEntity<?> auth(String username,String password); //获取token
 
-    ResponseEntity<?> register(String username,String password);//用户注册
+    ResponseEntity<?> register(String username,String password); //用户注册
 
+    User getOne(long userId);
 
+    int getUserNumber(); //获取用户数量
+
+    User saveAndFlush(User user);
 }

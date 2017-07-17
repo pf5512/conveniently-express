@@ -15,7 +15,5 @@ public interface OrderItemsService {
 
     ResponseEntity<?> getOne(long orderItemsId);
 
-    ResponseEntity<?> getByNeed(Need need);
-
     ResponseEntity<?> getByOrder(Order order);
 }
