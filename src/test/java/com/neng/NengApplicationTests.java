@@ -124,8 +124,6 @@ public class NengApplicationTests {
         alwaysLocation.setLng(lng);
         alwaysLocation.setUser(user);
         alwaysLocation.setType(type);
-
-        alwaysLocationService.save(alwaysLocation);
     }
 
 

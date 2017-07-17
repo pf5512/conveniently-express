@@ -53,15 +53,6 @@ public class OrderItemsServiceImpl implements OrderItemsService {
     }
 
     @Override
-    public ResponseEntity<?> getByNeed(Need need) {
-        orderItemss = orderItemsRepository.getByNeed(need);
-        Result<List<OrderItems>> result = new Result<>();
-        result.api(Api.SUCCESS);
-        result.setData(orderItemss);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @Override
     public ResponseEntity<?> getByOrder(Order order) {
         orderItemss = orderItemsRepository.getByOrder(order);
         Result<List<OrderItems>> result = new Result<>();

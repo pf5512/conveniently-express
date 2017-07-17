@@ -6,6 +6,8 @@ public interface ApiConf {
     String login="api/v1/login";//用户登录+
     String register="api/v1/register";//用户注册+
     String getPoints = "api/v1/getPoint"; //获取位置
+    String getUserNumber = "api/v1/getUserNumber"; //获取用户数量
+    String changeUserStatus = "api/v1/changeUserStatus"; //修改用户状态
 
 
     //-----------------------------NeedController---------------------------

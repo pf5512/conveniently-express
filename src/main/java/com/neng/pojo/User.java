@@ -46,5 +46,6 @@ public class User implements Serializable {
     private String idCardCorrectPic;//身份证正面照
     private String idCardOppositePic;//身份证反面照
     private Date birthday;//生日
+    private String status;//状态
 
 }
