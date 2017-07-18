@@ -15,4 +15,5 @@ public interface NeedRepository extends JpaRepository<Need, Long> {
 
     List<Need> findByUser(User user);
 
+    List<Need> getByStatus(String status);
 }

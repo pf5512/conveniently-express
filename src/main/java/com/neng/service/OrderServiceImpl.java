@@ -67,8 +67,8 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public ResponseEntity<?> saveAndFlushOrder(Long userId,Order order, Set<OrderItems> orderItems) {
-        saveOrderItems(userId,order, orderItems);
+    public ResponseEntity<?> saveAndFlushOrder(Long userId, Order order, Set<OrderItems> orderItems) {
+        saveOrderItems(userId, order, orderItems);
         Result<Order> result = new Result<>();
         result.api(Api.SUCCESS);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -77,6 +77,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 获取单个订单
+     *
      * @param orderId
      * @return
      */
@@ -119,14 +120,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    private void saveOrderItems(Long userId,Order order, Set<OrderItems> orderItems) {
+    private void saveOrderItems(Long userId, Order order, Set<OrderItems> orderItems) {
 
         User user = userRepository.findOne(userId);
         order.setOrderItems(orderItems);
         order.setUser(user);
         Order o = orderRepository.save(order);
-        for (OrderItems orderI: orderItems
-             ) {
+        for (OrderItems orderI : orderItems
+                ) {
             orderI.setOrder(o);
             orderI.setCreateTime(new Date());
             orderI.setTradeTime(new Date());
@@ -135,4 +136,13 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    @Override
+    public List<Order> getWeiZhiFu(String status) {
+        return orderRepository.getByStatus(status);
+    }
+
+    @Override
+    public List<Order> getYiZhiFu(String status) {
+        return orderRepository.getByStatus(status);
+    }
 }

@@ -3,8 +3,8 @@ package com.neng.config;
 public interface ApiConf {
 
     //-----------------------------用户相关---------------------------
-    String login="api/v1/login";//用户登录+
-    String register="api/v1/register";//用户注册+
+    String login = "api/v1/login";//用户登录+
+    String register = "api/v1/register";//用户注册+
     String getPoints = "api/v1/getPoint"; //获取位置
     String getUserNumber = "api/v1/getUserNumber"; //获取用户数量
     String changeUserStatus = "api/v1/changeUserStatus"; //修改用户状态
@@ -17,8 +17,7 @@ public interface ApiConf {
     String getNeedsByUser = "api/v1/getNeedByUser"; //获取用户发布的所有需求
     String getNeed = "api/v1/getNeed"; // 获取单个需求详情
     String deleteNeed = "api/v1/deleteNeed"; // 用户删除需求
-
-
+    String getWeiJieDan = "api/v1/getWeiJieDan";
 
     //-----------------------------OrderController---------------------------
     String receiveOrder = "api/v1/receiveOrder"; // 接单
@@ -26,7 +25,8 @@ public interface ApiConf {
     String getOrders = "api/v1/getOrders"; // 获取所有的订单列表
     String getOrderItems = "api/v1/getOrderItems"; // 获取所有的订单项
     String getOrderItem = "api/v1/getOrderItem"; // 获取单个订单详情
-
+    String getWeiZhiFu = "api/v1/getWeiZhiFu";
+    String getYiZhiFu = "api/v1/getYiZhiFu";
 
     //-----------------------------ShowOrderController---------------------------
     String saveShowOrder = "api/v1/saveShowOrder"; //保存晒单
@@ -48,9 +48,6 @@ public interface ApiConf {
     String getHomeAddresses = "api/v1/getAddresses"; // 获取所有的地址列表
     String updateHomeAddress = "api/v1/updateAddress"; // 更新地址
     String deleteHomeAddress = "api/v1/deleteAddress"; // 删除地址
-
-
-
 
 
     //-----------------------------客服相关---------------------------

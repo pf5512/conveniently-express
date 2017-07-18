@@ -37,12 +37,9 @@ public class NeedServiceImpl implements NeedService {
     }
 
 
-
-
-
-
     /**
      * 获取一个需求
+     *
      * @param needId
      * @return
      */
@@ -62,12 +59,13 @@ public class NeedServiceImpl implements NeedService {
 
     /**
      * 保存一个需求
+     *
      * @param need
      * @return
      */
     @Override
     @Transactional
-    public ResponseEntity<?> saveAndFlushNeed(Long userId,Need need) {
+    public ResponseEntity<?> saveAndFlushNeed(Long userId, Need need) {
         if (need == null) {
             Result<Need> result = new Result<>();
             result.api(Api.PARMETER_NOT_EXIT);
@@ -84,6 +82,7 @@ public class NeedServiceImpl implements NeedService {
 
     /**
      * 获取所有的用户需求
+     *
      * @return
      */
     @Override
@@ -118,6 +117,7 @@ public class NeedServiceImpl implements NeedService {
 
     /**
      * 获取单个需求
+     *
      * @param needId
      * @return
      */
@@ -132,6 +132,7 @@ public class NeedServiceImpl implements NeedService {
 
     /**
      * 更新需求信息
+     *
      * @param userId
      * @param need
      * @param needId
@@ -163,6 +164,7 @@ public class NeedServiceImpl implements NeedService {
 
     /**
      * 删除用户的需求
+     *
      * @param userId
      * @param needId
      * @return
@@ -179,11 +181,16 @@ public class NeedServiceImpl implements NeedService {
             Result<Need> result = new Result<>();
             result.api(Api.SUCCESS);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        }else{
+        } else {
             Result<Need> result = new Result<>();
             result.api(Api.NO_PERMISSION);
             return new ResponseEntity<>(result, HttpStatus.NOT_ACCEPTABLE);
 
         }
+    }
+
+    @Override
+    public List<Need> getWeiJieDan(String status) {
+        return needRepository.getByStatus(status);
     }
 }

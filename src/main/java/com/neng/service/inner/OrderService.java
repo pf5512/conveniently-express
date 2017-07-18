@@ -6,6 +6,7 @@ import com.neng.pojo.OrderItems;
 import com.neng.pojo.User;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,7 +16,7 @@ public interface OrderService {
 
     ResponseEntity<?> getOrders(User user);
 
-    ResponseEntity<?> saveAndFlushOrder(Long userId,Order order, Set<OrderItems> orderItems);
+    ResponseEntity<?> saveAndFlushOrder(Long userId, Order order, Set<OrderItems> orderItems);
 
     ResponseEntity<?> getOne(long orderId);
 
@@ -24,4 +25,8 @@ public interface OrderService {
     ResponseEntity<?> getByNumber(String number);
 
     ResponseEntity<?> delete(Order order);
+
+    List<Order> getWeiZhiFu(String status);
+
+    List<Order> getYiZhiFu(String status);
 }
