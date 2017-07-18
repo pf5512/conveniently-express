@@ -22,6 +22,7 @@ import java.util.Set;
  * Created by zhubuqing on 2017/7/14.
  */
 @RestController
+@CrossOrigin(origins = "*")
 public class OrderController {
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
