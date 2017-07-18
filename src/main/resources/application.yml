@@ -26,6 +26,7 @@ spring:
     thymeleaf:
       cache: false
       enabled: true
+      check-template-location: true
       prefix: classpath:/templates/
       suffix: .html
       content-type: text/html

@@ -1,7 +1,6 @@
 package com.neng.web.rest;
 
 import com.neng.config.ApiConf;
-import com.neng.pojo.User;
 import com.neng.service.inner.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpSession;
 
 /**

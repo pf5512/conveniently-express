@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CommonController {
 
 
-    @GetMapping("/admin")
+    @GetMapping("/index")
     public String admin(){
-        return "admin/index";
+        return "index";
     }
 
     @GetMapping("/main")
