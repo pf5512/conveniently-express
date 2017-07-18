@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -71,5 +71,35 @@ public class OrderController {
     public ResponseEntity<?> getOrderItem(@RequestParam OrderItems orderItems, HttpSession session) {
         logger.info("获取单个订单详情啦***************************");
         return orderItemsService.getOne(orderItems.getId());
+    }
+
+    /**
+     * 获取已接单未支付订单
+     *
+     * @param status
+     * @param model
+     * @param session
+     * @return
+     */
+    @PostMapping(value = ApiConf.getWeiZhiFu, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String getWeiZhiFu(@PathVariable("status") String status, Model model, HttpSession session) {
+        List<Order> orders = orderService.getWeiZhiFu(status);
+        model.addAttribute("orders", orders);
+        return "";
+    }
+
+    /**
+     * 获取已支付订单
+     *
+     * @param status
+     * @param model
+     * @param session
+     * @return
+     */
+    @GetMapping(value = ApiConf.getYiZhiFu, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String getYiZhiFu(@PathVariable("status") String status, Model model, HttpSession session) {
+        List<Order> orders = orderService.getYiZhiFu(status);
+        model.addAttribute("orders", orders);
+        return "";
     }
 }

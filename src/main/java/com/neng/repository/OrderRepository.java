@@ -19,4 +19,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Order getByNeed(Need need);
 
     Order getByNumber(String number);
+
+    List<Order> getByStatus(String status);
 }

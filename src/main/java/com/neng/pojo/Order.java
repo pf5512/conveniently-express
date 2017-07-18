@@ -46,4 +46,6 @@ public class Order implements Serializable {
     private Set<OrderItems> orderItems = new HashSet<>();//订单项目集合
 
     private Need need;//需求
+
+    private String status;
 }
