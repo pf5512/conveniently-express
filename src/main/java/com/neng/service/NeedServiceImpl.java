@@ -22,6 +22,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
+@Transactional
 public class NeedServiceImpl implements NeedService {
 
     private Need need;
@@ -64,7 +65,6 @@ public class NeedServiceImpl implements NeedService {
      * @return
      */
     @Override
-    @Transactional
     public ResponseEntity<?> saveAndFlushNeed(Long userId, Need need) {
         if (need == null) {
             Result<Need> result = new Result<>();
@@ -139,7 +139,6 @@ public class NeedServiceImpl implements NeedService {
      * @return
      */
     @Override
-    @Transactional
     public ResponseEntity<?> updateNeed(Long userId, Need need, Long needId) {
         User u = userRepository
                 .findOne(userId);

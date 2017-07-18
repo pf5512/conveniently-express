@@ -15,14 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 /**
  * Created by nengneng on 2017/6/6.
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
@@ -83,18 +86,50 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int getUserNumber() {
-        int userNum = userRepository.findAll().size();
-        return userNum;
+    public ResponseEntity<?> getUserNumber() {
+        Integer userNum = userRepository.findAll().size();
+        Result<Integer> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(userNum);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
-    public User getOne(long userId) {
-        return userRepository.getOne(userId);
+    public ResponseEntity<?> getOne(long userId) {
+        User u =  userRepository.findOne(userId);
+        Result<User> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(u);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
-    public User saveAndFlush(User user) {
-        return userRepository.saveAndFlush(user);
+    public ResponseEntity<?> saveAndFlush(User user) {
+
+        User u =  userRepository.saveAndFlush(user);
+        Result<User> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(u);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> getUsers() {
+        List<User> users = userRepository.findAll();
+        Result<List<User>> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(users);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> changeStatus(long userId, String status) {
+
+        User u =  userRepository.findOne(userId);
+        u.setStatus(status);
+        Result<User> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(u);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

@@ -50,24 +50,58 @@ public class OrderController {
         return orderService.saveAndFlushOrder(order.getUser().getId(), order, orderItemss);
     }
 
+    /**
+     * 取消订单
+     * @param order
+     * @param session
+     * @return
+     */
     @PostMapping(value = ApiConf.cancelOrder, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> cancelOrder(@RequestParam Order order, HttpSession session) {
         logger.info("删除订单啦***************************");
         return orderService.delete(order);
     }
 
-    @PostMapping(value = ApiConf.getOrders, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> getOrders(@RequestParam User user, HttpSession session) {
-        logger.info("获取所有订单啦***************************");
-        return orderService.getOrders(user);
+    /**
+     * 获取用户的订单
+     * @param user
+     * @param session
+     * @return
+     */
+    @PostMapping(value = ApiConf.getOrdersByUser, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> getOrdersByUser(@RequestParam User user, HttpSession session) {
+        logger.info("获取用户的所有订单啦***************************");
+        return orderService.getOrdersByUser(user);
     }
 
+    /**
+     * 获取所有的订单
+     * @return
+     */
+    @GetMapping(value = ApiConf.getOrders, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> getOrders() {
+        logger.info("获取所有订单啦***************************");
+        return orderService.getOrders();
+    }
+
+    /**
+     * 获取所有的订单列表
+     * @param order
+     * @param session
+     * @return
+     */
     @PostMapping(value = ApiConf.getOrderItems, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> getOrderItems(@RequestParam Order order, HttpSession session) {
         logger.info("获取所有订单列表啦***************************");
         return orderItemsService.getByOrder(order);
     }
 
+    /**
+     * 获取单个订单的详情
+     * @param orderItems
+     * @param session
+     * @return
+     */
     @PostMapping(value = ApiConf.getOrderItem, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> getOrderItem(@RequestParam OrderItems orderItems, HttpSession session) {
         logger.info("获取单个订单详情啦***************************");

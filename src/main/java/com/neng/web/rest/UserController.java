@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -58,21 +59,35 @@ public class UserController {
     }
 
     /**
+     * 获取所有的用户
+     * @return
+     */
+    @GetMapping(value = ApiConf.getUsers, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUsers() {
+        logger.info("获取所有用户+++++++");
+        return userService.getUsers();
+    }
+
+    /**
      * 获取用户数量
      *
      * @return
      */
     @PostMapping(value = ApiConf.getUserNumber, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String getUserNumber(@PathVariable("userId") long userId, Model model, HttpSession session) {
-        model.addAttribute("number", userService.getUserNumber());
-        return "";
+    public ResponseEntity<?> getUserNumber() {
+        return userService.getUserNumber();
     }
 
+    /**
+     * 改变用户的状态
+     * @param userId
+     * @param status
+     * @param model
+     * @param session
+     * @return
+     */
     @PostMapping(value = ApiConf.changeUserStatus, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String changeUserStatus(@PathVariable("userId") long userId, @PathVariable("status") String status, Model model, HttpSession session) {
-        User u = userService.getOne(userId);
-        u.setStatus(status);
-        userService.saveAndFlush(u);
-        return "";
+    public ResponseEntity<?> changeUserStatus(@PathVariable("userId") long userId, @PathVariable("status") String status, Model model, HttpSession session) {
+        return userService.changeStatus(userId, status);
     }
 }

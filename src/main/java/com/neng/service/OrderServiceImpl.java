@@ -26,6 +26,7 @@ import java.util.Set;
  */
 @Service
 @Slf4j
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
     private Order order;
@@ -51,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public ResponseEntity<?> getOrders(User user) {
+    public ResponseEntity<?> getOrdersByUser(User user) {
         orders = orderRepository.findByUser(user);
         Result<List<Order>> result = new Result<>();
         result.api(Api.SUCCESS);
@@ -119,7 +120,6 @@ public class OrderServiceImpl implements OrderService {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @Transactional
     private void saveOrderItems(Long userId, Order order, Set<OrderItems> orderItems) {
 
         User user = userRepository.findOne(userId);
@@ -144,5 +144,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getYiZhiFu(String status) {
         return orderRepository.getByStatus(status);
+    }
+
+    @Override
+    public ResponseEntity<?> getOrders() {
+        List<Order> orders = orderRepository.findAll();
+        Result<List<Order>> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(orders);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

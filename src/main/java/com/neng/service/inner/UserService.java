@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by nengneng on 2017/6/6.
@@ -18,9 +19,13 @@ public interface UserService {
 
     ResponseEntity<?> register(String username,String password); //用户注册
 
-    User getOne(long userId);
+    ResponseEntity<?> getOne(long userId);
 
-    int getUserNumber(); //获取用户数量
+    ResponseEntity<?> getUserNumber(); //获取用户数量
 
-    User saveAndFlush(User user);
+    ResponseEntity<?> saveAndFlush(User user);
+
+    ResponseEntity<?> getUsers();
+
+    ResponseEntity<?> changeStatus(long userId, String status);
 }

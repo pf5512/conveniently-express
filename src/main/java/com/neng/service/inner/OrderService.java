@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public interface OrderService {
 
-    ResponseEntity<?> getOrders(User user);
+    ResponseEntity<?> getOrdersByUser(User user);
 
     ResponseEntity<?> saveAndFlushOrder(Long userId, Order order, Set<OrderItems> orderItems);
 
@@ -29,4 +29,6 @@ public interface OrderService {
     List<Order> getWeiZhiFu(String status);
 
     List<Order> getYiZhiFu(String status);
+
+    ResponseEntity<?> getOrders();
 }

@@ -7,7 +7,8 @@ public interface ApiConf {
     String register = "api/v1/register";//用户注册+
     String getPoints = "api/v1/getPoint"; //获取位置
     String getUserNumber = "api/v1/getUserNumber"; //获取用户数量
-    String changeUserStatus = "api/v1/changeUserStatus"; //修改用户状态
+    String getUsers = "api/v1/getUsers"; //获取所有的用户
+    String changeUserStatus = "api/v1/changeUserStatus/{status}"; //修改用户状态
 
 
     //-----------------------------NeedController---------------------------
@@ -23,6 +24,7 @@ public interface ApiConf {
     String receiveOrder = "api/v1/receiveOrder"; // 接单
     String cancelOrder = "api/v1/cancelOrder"; // 取消接单
     String getOrders = "api/v1/getOrders"; // 获取所有的订单列表
+    String getOrdersByUser = "api/v1/getOrdersByUser"; // 获取所有的订单列表
     String getOrderItems = "api/v1/getOrderItems"; // 获取所有的订单项
     String getOrderItem = "api/v1/getOrderItem"; // 获取单个订单详情
     String getWeiZhiFu = "api/v1/getWeiZhiFu";
