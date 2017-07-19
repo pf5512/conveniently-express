@@ -9,7 +9,8 @@
 <div class="app-body">
     <div th:replace="shared/sidebar :: copy"></div>
 
-    <div th:replace="shared/content :: copy"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div th:replace="${view} :: copy"></div>
 
 
 </div>

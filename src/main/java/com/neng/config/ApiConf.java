@@ -54,4 +54,29 @@ public interface ApiConf {
 
     //-----------------------------客服相关---------------------------
     String getMessage = "api/v1/getMessage"; //获取所有任务
+
+
+
+    //----------------------------页面数据相关----------------------------
+    String index = "dashboard"; //主页
+    String page = "page"; //分页数据
+    String student = "student"; //学生信息
+    String teacher = "teacher"; //老师信息
+    String course = "course"; //课程信息
+
+
+    //----------------------------页面相关----------------------------
+    String view_content = "view"; //主要显示界面
+    String fontend = "shared/content"; //主页
+    String user_list = "user/list"; //用户列表
+    String order_list = "order/list"; //订单列表
+    String need_list = "need/list"; //订单列表
+
+    String breadCump = "info";
+    String user = "User";
+    String order = "Order";
+    String need = "Need";
+
+
+
 }

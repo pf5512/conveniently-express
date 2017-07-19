@@ -71,7 +71,6 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
-		<!--alipay-->
 
 	</dependencies>
 

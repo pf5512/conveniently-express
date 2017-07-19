@@ -1,5 +1,10 @@
+<!DOCTYPE html>
 
-    <!--<div class="row">-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--<div class="row">-->
     <div th:if="${not #lists.isEmpty(page.content)}">
         <div class="col-sm-5">
             <div class="pagination"><p >页面信息 <span class="badge"
@@ -50,5 +55,7 @@
     </div>
 
     <!--</div>-->
+</body>
+</html>
 
 
