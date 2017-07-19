@@ -39,31 +39,32 @@
                                 <td th:text="${user.realName}">Vishnu Serghei</td>
                                 <td th:text="${user.address}">2012/01/01</td>
                                 <td>
-                                    <span class="badge badge-success" th:text="${user.status}">Active</span>
+                                    <span class="badge badge-success" th:if="${user.status eq 1}" >已激活</span>
+                                    <span class="badge badge-danger" th:if="${user.status eq 0}" >已冻结</span>
                                 </td>
-                                <td>Member</td>
+                                <td class="text-center">
+                                    <div >
+                                        <input type="hidden" id="studentId" name="id" />
+                                        <a type="button" class="btn btn-primary btn-md"  th:href="@{'/api/v1/user/' + ${user.id} + '/' + ${user.status} }">
+                                            <span class="fa fa-pencil"></span>
+                                            <span class="hidden-md-down" th:if="${user.status eq 1}"  >冻结</span>
+                                            <span class="hidden-md-down" th:if="${user.status eq 0}"  >激活</span></a>
+                                        <!--<a type="button" class="btn btn-danger btn-md"  th:href="${'/api/v1/user/'+ '/student/'} ">-->
+                                            <!--<span class="fa fa-remove"></span>-->
+                                            <!--<span class="hidden-md-down">删除</span></a>-->
+
+
+                                    </div>
+                                </td>
 
                             </tr>
 
                             </tbody>
+                            </th:block>
                         </table>
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">4</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+                        </div>
+
+                        <div th:include="shared/pagination"></div>
                     </div>
                 </div>
             </div>

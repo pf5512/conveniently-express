@@ -31,10 +31,7 @@ public class Order implements Serializable {
     private String number;//订单编号
     @Temporal(value = TemporalType.DATE)
     private Date tradeTime;//交易时间
-
-
     private Double allPrice;//总价格
-
     /**
      * 接受订单的User
      */
@@ -47,5 +44,5 @@ public class Order implements Serializable {
 
     private Need need;//需求
 
-    private String status;
+    private int status;
 }

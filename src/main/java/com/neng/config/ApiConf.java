@@ -8,7 +8,7 @@ public interface ApiConf {
     String getPoints = "api/v1/getPoint"; //获取位置
     String getUserNumber = "api/v1/getUserNumber"; //获取用户数量
     String getUsers = "api/v1/getUsers"; //获取所有的用户
-    String changeUserStatus = "api/v1/changeUserStatus/{status}"; //修改用户状态
+    String changeUserStatus = "api/v1/user/{userId}/{status}"; //修改用户状态
 
 
     //-----------------------------NeedController---------------------------
@@ -58,7 +58,7 @@ public interface ApiConf {
 
 
     //----------------------------页面数据相关----------------------------
-    String index = "dashboard"; //主页
+    String index = "index"; //主页
     String page = "page"; //分页数据
     String student = "student"; //学生信息
     String teacher = "teacher"; //老师信息
@@ -76,6 +76,10 @@ public interface ApiConf {
     String user = "User";
     String order = "Order";
     String need = "Need";
+
+    String users = "users";
+    String orders = "orders";
+    String needs = "needs";
 
 
 

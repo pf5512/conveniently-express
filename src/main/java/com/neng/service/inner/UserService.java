@@ -1,6 +1,7 @@
 package com.neng.service.inner;
 
 import com.neng.pojo.User;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
@@ -27,5 +28,7 @@ public interface UserService {
 
     ResponseEntity<?> getUsers();
 
-    ResponseEntity<?> changeStatus(long userId, String status);
+    ResponseEntity<?> changeStatus(long userId, int status);
+
+    Page<User> list(Pageable pageable);
 }

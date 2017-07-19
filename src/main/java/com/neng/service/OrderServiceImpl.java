@@ -12,6 +12,8 @@ import com.neng.service.inner.OrderService;
 import com.neng.utils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -153,5 +155,11 @@ public class OrderServiceImpl implements OrderService {
         result.api(Api.SUCCESS);
         result.setData(orders);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public Page<Order> list(Pageable pageable) {
+        Page<Order> page = orderRepository.findAll(pageable);
+        return page;
     }
 }

@@ -4,57 +4,39 @@
 
 <body>
 
-<!--<div class="row">-->
+<nav>
     <div th:if="${not #lists.isEmpty(page.content)}">
-        <div class="col-sm-5">
-            <div class="pagination"><p >页面信息 <span class="badge"
-                                                       th:text="${page.size * (page.number-1) + 1}"></span> 当前页
-                <span class="badge" th:text="${page.lastPage ? page.totalElements : page.size * (page.number-1)+ page.size}"></span> 当前页的个数
-                <span class="badge"
-                      th:text="${page.totalElements}"></span>
-                总数</p></div>
-        </div>
+        <ul class="pagination" th:fragment='paginationbar'>
+            <li  th:class="${page.firstPage}?'page-item active':'page-item'">
+                <!--<a class="page-link active" href="#" th:if='${page.firstPage}'>首页</a>-->
+                <a class="page-link" th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>
+                    首页</a>
+            </li>
+            <li th:class="page-item" th:if='${page.hasPreviousPage}'>
+                <a class="page-link " th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'
+                >上一页</a>
+            </li>
 
-        <div class="col-sm-7">
-            <!-- Pagination Bar -->
-            <div th:fragment='paginationbar'>
-                <div class="text-center">
-                    <ul class='pagination pagination-centered'>
-                        <li th:class="${page.firstPage}?'disabled':''">
-                            <span th:if='${page.firstPage}'>← 首页</span>
-                            <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>←
-                                首页</a>
-                        </li>
-                        <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
-                            <span th:if='${not page.hasPreviousPage}'>上一页</span>
-                            <a th:if='${page.hasPreviousPage}'
-                               th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'
-                               title='Go to previous page'>上一页</a>
-                        </li>
-                        <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
-                            <span th:if='${item.current}' th:text='${item.number}'>1</span>
-                            <a th:if='${not item.current}'
-                               th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span
-                                    th:text='${item.number}'>1</span></a>
-                        </li>
-                        <li th:class="${page.hasNextPage}? '' : 'disabled'">
-                            <span th:if='${not page.hasNextPage}'>下一页</span>
-                            <a th:if='${page.hasNextPage}'
-                               th:href='@{${page.url}(page=${page.number},size=${page.size})}'
-                               title='Go to next page'>下一页</a>
-                        </li>
-                        <li th:class="${page.lastPage}? 'disabled' : ''">
-                            <span th:if='${page.lastPage}'>尾页 →</span>
-                            <a th:if='${not page.lastPage}'
-                               th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>尾页 →</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+            <li th:each='item : ${page.items}' th:class="${item.current}? 'page-item active' : 'page-item'">
+                <span class="page-link" th:if='${item.current}' th:text='${item.number}'>1</span>
+                <a class="page-link" th:if='${not item.current}'
+                   th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span
+                        th:text='${item.number}'>1</span></a>
+            </li>
+
+            <li th:class="page-item" th:if='${page.hasNextPage}'>
+                <a class="page-link" th:if='${page.hasNextPage}'
+                   th:href='@{${page.url}(page=${page.number},size=${page.size})}'
+                >下一页</a>
+            </li>
+            <li th:class="${page.lastPage}? 'page-item active':'page-item'">
+                <!--<span class="page-link disabled" th:if='${page.lastPage}'>尾页</span>-->
+                <a class="page-link" th:if='${not page.lastPage}'
+                   th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>尾页</a>
+            </li>
+        </ul>
     </div>
-
-    <!--</div>-->
+</nav>
 </body>
 </html>
 

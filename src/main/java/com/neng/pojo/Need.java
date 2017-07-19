@@ -36,7 +36,7 @@ public class Need implements Serializable {
     private String endLat;//结束纬度
     private String endLng;//结束经度
     private String limitTime;//限制时间
-    private String status;//状态
+    private int status;//状态
     private Long alwaysLocationId;//常用地点ID
     private String content;//文本
     private Double money;//佣金

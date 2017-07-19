@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nengneng on 2017/6/5.
@@ -46,6 +47,12 @@ public class User implements Serializable {
     private String idCardCorrectPic;//身份证正面照
     private String idCardOppositePic;//身份证反面照
     private Date birthday;//生日
-    private String status;//状态
+    private int status;//状态
+
+    @ManyToMany(cascade = {}, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "roles_id")})
+    private List<Role> roles;
 
 }

@@ -5,93 +5,75 @@
 <body>
 <!-- Main content -->
 <main class="main" th:fragment="copy">
-    <div th:replace="shared/breadcrumb :: copy"></div>
 
+    <div th:replace="shared/breadcrumb :: copy"></div>
     <div class="container-fluid">
 
-
+        <div class="animated fadeIn">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Combined All Table
+                        <i class="fa fa-align-justify"></i> 需求列表
                     </div>
                     <div class="card-block">
+                        <div th:if="${not #lists.isEmpty(page.content)}">
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Date registered</th>
-                                <th>Role</th>
-                                <th>Status</th>
+                                <th>商品名称</th>
+                                <th>商品价格</th>
+                                <th>开始纬度</th>
+                                <th>开始经度</th>
+                                <th>结束纬度</th>
+                                <th>结束经度</th>
+                                <th>限制时间</th>
+                                <th>佣金</th>
+                                <th>简介</th>
+                                <th>状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
+                            <th:block th:each="need : ${page.content}">
                             <tbody>
                             <tr>
-                                <td>Vishnu Serghei</td>
-                                <td>2012/01/01</td>
-                                <td>Member</td>
+                                <td th:text="${need.goodName}">Vishnu Serghei</td>
+                                <td th:text="${need.goodPrice}">Vishnu Serghei</td>
+                                <td th:text="${need.startLat}">Vishnu Serghei</td>
+                                <td th:text="${need.startLng}">Vishnu Serghei</td>
+                                <td th:text="${need.endLat}">Vishnu Serghei</td>
+                                <td th:text="${need.endLng}">Vishnu Serghei</td>
+                                <td th:text="${need.limitTime}">Vishnu Serghei</td>
+                                <td th:text="${need.money}">Vishnu Serghei</td>
+                                <td th:text="${need.content}">Vishnu Serghei</td>
                                 <td>
-                                    <span class="badge badge-success">Active</span>
+                                    <span class="badge badge-success" th:if="${need.status eq 1}" >已被接单</span>
+                                    <span class="badge badge-info" th:if="${need.status eq 0}" >未被接单</span>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>Zbyněk Phoibos</td>
-                                <td>2012/02/01</td>
-                                <td>Staff</td>
-                                <td>
-                                    <span class="badge badge-danger">Banned</span>
+                                <td class="text-center">
+                                    <div >
+                                        <input type="hidden" id="studentId" name="id" />
+                                        <a th:if="${need.status eq 1}" type="button" class="btn btn-primary btn-sm"  th:href="@{'/api/v1/need/' + ${need.id}}">
+                                            <span class="fa fa-pencil"></span>
+                                            <span class="hidden-md-down"   >查看详情</span>
+                                        </a>
+                                    </div>
                                 </td>
+
                             </tr>
-                            <tr>
-                                <td>Einar Randall</td>
-                                <td>2012/02/01</td>
-                                <td>Admin</td>
-                                <td>
-                                    <span class="badge badge-default">Inactive</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Félix Troels</td>
-                                <td>2012/03/01</td>
-                                <td>Member</td>
-                                <td>
-                                    <span class="badge badge-warning">Pending</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Aulus Agmundr</td>
-                                <td>2012/01/21</td>
-                                <td>Staff</td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-                            </tr>
+
                             </tbody>
+                            </th:block>
                         </table>
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">4</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+                        </div>
+
+                        <div th:include="shared/pagination"></div>
                     </div>
                 </div>
             </div>
             <!--/.col-->
         </div>
-
+        </div>
     </div>
     <!-- /.conainer-fluid -->
 </main>

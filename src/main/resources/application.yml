@@ -52,3 +52,12 @@ ALIPAY:
   ALIPAY_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA+woaiaiOxn11iu/gQ8kh9dYoi/ujs5dYREBJVJPZSLULZdNwzfwVmY3O4VuWQKsA0IshWvino2ubJZ4Bnsu2e1Ob2W9b6eOz/ak2NJnhqQI/6KPVH6aXXrnoMtv70fSw2D2k9LUiBI8gZPAEmhl2d7+ixpDxO3TFIVh1daVJAQo580LpVYKVmeYNqpb5o7H1eBRldn7eeiVMPbtI41UzKBECTK/o8VwF1Xi2n8MdMXqaAHck5p/mVyJvGqstEZk98PJ7QUdQp+udlWllnESSJ8ZdCHHJNocGPsQ1Hj9nbFIFPlZ90+GYDUwzvFdgsnmer8mAx73JU9138Ijx+x76FwIDAQAB
   PAY_URL: https://openapi.alipaydev.com/gateway.do
 
+
+securityconfig:
+  logoutsuccssurl: /
+  permitall: /rest/**,/bbs**
+  deniedpage: /deny
+  urlroles: /**/new/** = admin;
+            /**/edit/** = admin,editor;
+            /**/delete/** = admin
+

@@ -1,6 +1,7 @@
 package com.neng.service;
 
 import com.neng.pojo.Need;
+import com.neng.pojo.Order;
 import com.neng.pojo.User;
 import com.neng.pojo.config.Api;
 import com.neng.repository.NeedRepository;
@@ -9,6 +10,8 @@ import com.neng.service.inner.NeedService;
 import com.neng.utils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -191,5 +194,11 @@ public class NeedServiceImpl implements NeedService {
     @Override
     public List<Need> getWeiJieDan(String status) {
         return needRepository.getByStatus(status);
+    }
+
+    @Override
+    public Page<Need> list(Pageable pageable) {
+        Page<Need> page = needRepository.findAll(pageable);
+        return page;
     }
 }

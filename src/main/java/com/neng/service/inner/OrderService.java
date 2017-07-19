@@ -4,6 +4,8 @@ import com.neng.pojo.Need;
 import com.neng.pojo.Order;
 import com.neng.pojo.OrderItems;
 import com.neng.pojo.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -31,4 +33,6 @@ public interface OrderService {
     List<Order> getYiZhiFu(String status);
 
     ResponseEntity<?> getOrders();
+
+    Page<Order> list(Pageable pageable);
 }

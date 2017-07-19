@@ -6,12 +6,15 @@ import com.neng.pojo.User;
 import com.neng.pojo.UserBuilder;
 import com.neng.pojo.config.Api;
 import com.neng.pojo.config.Constant;
+import com.neng.pojo.enumClass.StatusEnum;
 import com.neng.repository.UserRepository;
 import com.neng.service.inner.UserService;
 import com.neng.utils.CustomValidator;
 import com.neng.utils.RespFactory;
 import com.neng.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -123,13 +126,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<?> changeStatus(long userId, String status) {
+    public ResponseEntity<?> changeStatus(long userId, int status) {
 
         User u =  userRepository.findOne(userId);
-        u.setStatus(status);
+        Result<User> result = changeUserStatus(u, status);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    private Result<User> changeUserStatus(User u, int status) {
+
+        if (status == StatusEnum.ACTIVE.getCode()) {
+            u.setStatus(StatusEnum.FREEZE.getCode());
+        } else {
+            u.setStatus(StatusEnum.ACTIVE.getCode());
+        }
+        userRepository.saveAndFlush(u);
         Result<User> result = new Result<>();
         result.api(Api.SUCCESS);
         result.setData(u);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return result;
+    }
+
+    @Override
+    public Page<User> list(Pageable pageable) {
+        Page<User> page = userRepository.findAll(pageable);
+        return page;
     }
 }

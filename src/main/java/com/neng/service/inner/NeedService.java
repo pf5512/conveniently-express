@@ -1,6 +1,8 @@
 package com.neng.service.inner;
 
 import com.neng.pojo.Need;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -26,4 +28,6 @@ public interface NeedService {
     ResponseEntity<?> deleteNeed(Long userId, Long needId);
 
     List<Need> getWeiJieDan(String status);
+
+    Page<Need> list(Pageable pageable);
 }

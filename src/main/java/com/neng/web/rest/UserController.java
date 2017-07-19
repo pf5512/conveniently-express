@@ -75,16 +75,16 @@ public class UserController {
         return userService.getUserNumber();
     }
 
-    /**
-     * 改变用户的状态
-     * @param userId
-     * @param status
-     * @param model
-     * @param session
-     * @return
-     */
-    @PostMapping(value = ApiConf.changeUserStatus, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> changeUserStatus(@PathVariable("userId") long userId, @PathVariable("status") String status, Model model, HttpSession session) {
-        return userService.changeStatus(userId, status);
-    }
+//    /**
+//     * 改变用户的状态
+//     * @param userId
+//     * @param status
+//     * @param model
+//     * @param session
+//     * @return
+//     */
+//    @PostMapping(value = ApiConf.changeUserStatus, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//    public ResponseEntity<?> changeUserStatus(@PathVariable("userId") long userId, @PathVariable("status") int status, Model model, HttpSession session) {
+//        return userService.changeStatus(userId, status);
+//    }
 }
