@@ -82,5 +82,9 @@ public interface ApiConf {
     String needs = "needs";
 
 
+    //----------------------------AliPay----------------------------
+    String getWay = "/getWay";
+    String prepareAliPay = "/prepareAliPay";
+    String searchByCondi = "/searchByCondi";
 
 }
