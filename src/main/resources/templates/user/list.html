@@ -10,6 +10,98 @@
     <div class="container-fluid">
 
         <div class="animated fadeIn">
+            <div class="row">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="input-prepend input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i>
+                    </span>
+                            <input id="prependedInput" class="form-control" size="16" type="text" placeholder="搜索用户">
+                            <span class="input-group-btn">
+                        <button class="btn btn-info" type="button" th:onclick="'javascript:userSearch();'" >搜索</button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <br>
+            <div class="row" id="searchShow" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-align-justify"></i> 搜索到的用户
+                        </div>
+                        <div class="card-block">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>用户名</th>
+                                        <th>注册时间</th>
+                                        <th>手机号</th>
+                                        <th>真实姓名</th>
+                                        <th>地址</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td id="name" >Vishnu Serghei</td>
+                                            <td id="createDate" >Vishnu Serghei</td>
+                                            <td id="phone" >2012/01/01</td>
+                                            <td id="realName" >Vishnu Serghei</td>
+                                            <td id="address" >2012/01/01</td>
+                                            <td>
+                                                <span class="badge badge-success" id="status1" style="display: none;" >已激活</span>
+                                                <span class="badge badge-danger" id="status0" style="display: none;">已冻结</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <!--<div >-->
+                                                    <!--<input type="hidden" id="id" name="id" />-->
+                                                    <!--<input type="hidden" id="status" name="status" />-->
+                                                    <!--<a type="button" th:class="${user.status} eq 0 ? 'btn btn-primary btn-md':'btn btn-danger btn-md'" class="btn btn-primary btn-md"  th:href="@{'/api/v1/user/' + ${user.id} + '/' + ${user.status} }">-->
+                                                        <!--<span class="hidden-md-down" th:if="${user.status eq 1}"  >冻结</span>-->
+                                                        <!--<span class="hidden-md-down" th:if="${user.status eq 0}"  >激活</span></a>-->
+                                                    <!--&lt;!&ndash;<a type="button" class="btn btn-danger btn-md"  th:href="${'/api/v1/user/'+ '/student/'} ">&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;<span class="fa fa-remove"></span>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;<span class="hidden-md-down">删除</span></a>&ndash;&gt;-->
+
+
+                                                <!--</div>-->
+                                            </td>
+
+                                        </tr>
+
+                                        </tbody>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.col-->
+            </div>
+
+
+                    <br>
+                    <div id="errorShow" style="display: none;" >
+                        <div class="col-lg-12">
+                            <h1>搜索结果</h1>
+                            <div class="card">
+                                <center>
+                                    <h2>没有用户</h2>
+                                </center>
+
+                            </div>
+                        </div>
+                    </div>
+            <br>
+            <br>
+            <br>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -33,9 +125,9 @@
                             <th:block th:each="user : ${page.content}">
                             <tbody>
                             <tr>
-                                <td th:text="${user.username}">Vishnu Serghei</td>
+                                <td th:text="${user.name}">Vishnu Serghei</td>
                                 <td th:text="${user.phone}">2012/01/01</td>
-                                <td th:text="${user.username}">Member</td>
+                                <td th:text="${user.name}">Member</td>
                                 <td th:text="${user.realName}">Vishnu Serghei</td>
                                 <td th:text="${user.address}">2012/01/01</td>
                                 <td>
@@ -45,8 +137,7 @@
                                 <td class="text-center">
                                     <div >
                                         <input type="hidden" id="studentId" name="id" />
-                                        <a type="button" class="btn btn-primary btn-md"  th:href="@{'/api/v1/user/' + ${user.id} + '/' + ${user.status} }">
-                                            <span class="fa fa-pencil"></span>
+                                        <a type="button" th:class="${user.status} eq 0 ? 'btn btn-primary btn-md':'btn btn-danger btn-md'" class="btn btn-primary btn-md"  th:href="@{'/api/v1/user/' + ${user.id} + '/' + ${user.status} }">
                                             <span class="hidden-md-down" th:if="${user.status eq 1}"  >冻结</span>
                                             <span class="hidden-md-down" th:if="${user.status eq 0}"  >激活</span></a>
                                         <!--<a type="button" class="btn btn-danger btn-md"  th:href="${'/api/v1/user/'+ '/student/'} ">-->
@@ -65,6 +156,8 @@
                         </div>
 
                         <div th:include="shared/pagination"></div>
+
+
                     </div>
                 </div>
             </div>

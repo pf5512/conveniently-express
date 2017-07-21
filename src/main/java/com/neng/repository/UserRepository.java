@@ -11,9 +11,9 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,Long> {
 
 
-    Optional<User> findByUsernameAndPassword(String username, String password);
+    Optional<User> findByNameAndPassword(String username, String password);
 
-    int countByUsername(String username);
+    int countByName(String username);
 
-    User findUserByUsername(String neng);
+    User findUserByName(String neng);
 }

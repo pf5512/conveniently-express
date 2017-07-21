@@ -1,13 +1,15 @@
 package com.neng.web.rest;
 
 import com.neng.config.ApiConf;
+import com.neng.pojo.User;
 import com.neng.service.inner.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +23,6 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
-
 
     @Autowired
     public UserController(UserService userService) {
@@ -63,6 +64,28 @@ public class UserController {
     public ResponseEntity<?> getUsers() {
         logger.info("获取所有用户+++++++");
         return userService.getUsers();
+    }
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @GetMapping(value = ApiConf.user_get, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUser(@PathVariable("userId") Long userId) {
+        logger.info("获取用户信息+++++++");
+        return userService.getOne(userId);
+    }
+
+
+    /**
+     * 查询用户信息
+     * @param name
+     * @return
+     */
+    @GetMapping(value = ApiConf.user_add, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Transactional
+    public ResponseEntity<?> user_search(@RequestParam("name") String name) {
+        return userService.search(name);
     }
 
     /**

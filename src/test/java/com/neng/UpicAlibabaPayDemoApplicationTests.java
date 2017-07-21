@@ -36,7 +36,7 @@ public class UpicAlibabaPayDemoApplicationTests {
 		parms.put("timeoutExpress", "100m");
 		parms.put("totalAmount", "0.01");
 		parms.put("productCode", "QUICK_MSECURITY_PAY");
-		AlipayTradeAppPayResponse appPay = a.appPay(parms, "https://www.baidu.com");
+		AlipayTradeAppPayResponse appPay = a.appPay(parms, "http://127.0.0.1:8080/getWay");
 		System.out.println(URLDecoder.decode(appPay.getBody(), "UTF-8"));
 		System.out.println(appPay.getTradeNo());
 		System.out.println(appPay.isSuccess());
@@ -58,7 +58,7 @@ public class UpicAlibabaPayDemoApplicationTests {
 //		AlipayTradeAppPayResponse appPay = a.appPay(parms, "https://www.baidu.com");
 //		System.out.println(URLDecoder.decode(appPay.getBody(), "UTF-8"));
 //		System.out.println(appPay.getCode());
-		String json="{\"out_trade_no\":\"1500443454028\"}";
+		String json="{\"out_trade_no\":\"1500454702795\"}";
 		AlipayTradeQueryResponse testQuery = a.testQuery(json);
 		System.out.println(testQuery.getBody());
 	}

@@ -1,16 +1,12 @@
 package com.neng.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by nengneng on 2017/6/5.
@@ -33,7 +29,7 @@ public class User implements Serializable {
     private int version;//版本号
 
     @Column(nullable = false, length = 40)
-    private String username;//用户名
+    private String name;//用户名
 
     @Column(nullable = false, length = 32)
     private String password;//密码
@@ -49,10 +45,9 @@ public class User implements Serializable {
     private Date birthday;//生日
     private int status;//状态
 
-    @ManyToMany(cascade = {}, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "roles_id")})
-    private List<Role> roles;
+
+
+
+
 
 }

@@ -109,6 +109,11 @@ public class OrderServiceImpl implements OrderService {
         order = new Order();
         order = orderRepository.getByNumber(number);
         Result<Order> result = new Result<>();
+
+        if (order == null) {
+            result.api(Api.SERVRE_ERROR);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
         result.api(Api.SUCCESS);
         result.setData(order);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -125,7 +130,6 @@ public class OrderServiceImpl implements OrderService {
     private void saveOrderItems(Long userId, Order order, Set<OrderItems> orderItems) {
 
         User user = userRepository.findOne(userId);
-        order.setOrderItems(orderItems);
         order.setUser(user);
         Order o = orderRepository.save(order);
         for (OrderItems orderI : orderItems

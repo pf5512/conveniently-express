@@ -31,4 +31,6 @@ public interface UserService {
     ResponseEntity<?> changeStatus(long userId, int status);
 
     Page<User> list(Pageable pageable);
+
+    ResponseEntity<?> search(String name);
 }

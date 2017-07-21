@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8088
 
 spring:
     datasource:
@@ -53,11 +53,4 @@ ALIPAY:
   PAY_URL: https://openapi.alipaydev.com/gateway.do
 
 
-securityconfig:
-  logoutsuccssurl: /
-  permitall: /rest/**,/bbs**
-  deniedpage: /deny
-  urlroles: /**/new/** = admin;
-            /**/edit/** = admin,editor;
-            /**/delete/** = admin
 
