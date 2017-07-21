@@ -90,5 +90,9 @@ public interface ApiConf {
     String models = "models";
 
 
+    //----------------------------AliPay----------------------------
+    String getWay = "/getWay";
+    String prepareAliPay = "/prepareAliPay";
+    String searchByCondi = "/searchByCondi";
 
 }
