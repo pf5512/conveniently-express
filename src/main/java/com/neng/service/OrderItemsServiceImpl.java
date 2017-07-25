@@ -5,6 +5,7 @@ import com.neng.pojo.Order;
 import com.neng.pojo.OrderItems;
 import com.neng.pojo.config.Api;
 import com.neng.repository.OrderItemsRepository;
+import com.neng.repository.OrderRepository;
 import com.neng.service.inner.OrderItemsService;
 import com.neng.utils.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +31,13 @@ public class OrderItemsServiceImpl implements OrderItemsService {
 
     private OrderItemsRepository orderItemsRepository;
 
+    private OrderRepository orderRepository;
+
     @Autowired
-    public OrderItemsServiceImpl(OrderItemsRepository orderItemsRepository) {
+    public OrderItemsServiceImpl(OrderItemsRepository orderItemsRepository,
+                                 OrderRepository orderRepository) {
         this.orderItemsRepository = orderItemsRepository;
+        this.orderRepository = orderRepository;
     }
 
 
@@ -58,6 +63,26 @@ public class OrderItemsServiceImpl implements OrderItemsService {
     public ResponseEntity<?> getByOrder(Order order) {
         orderItemss = orderItemsRepository.getByOrder(order);
         Result<List<OrderItems>> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(orderItemss);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> getByOrderId(Long id) {
+        Order order = orderRepository.findOne(id);
+        log.info(order + "fksjgkljsadkgjkljdsklagkjdsa");
+        Result<List<OrderItems>> result = new Result<>();
+        if (order == null) {
+            result.api(Api.SERVRE_ERROR);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        orderItemss = orderItemsRepository.getByOrder(order);
+        log.info(orderItemss + "2131321231235645645645456123123");
+        if (orderItemss == null) {
+            result.api(Api.SERVRE_ERROR);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
         result.api(Api.SUCCESS);
         result.setData(orderItemss);
         return new ResponseEntity<>(result, HttpStatus.OK);

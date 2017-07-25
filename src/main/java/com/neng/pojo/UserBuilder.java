@@ -9,7 +9,7 @@ public class UserBuilder{
 
 
     public UserBuilder username(final String username){
-        user.setUsername(username);
+        user.setName(username);
         return this;
     }
 

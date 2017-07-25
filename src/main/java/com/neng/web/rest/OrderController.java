@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,14 +87,14 @@ public class OrderController {
 
     /**
      * 获取所有的订单列表
-     * @param order
+     * @param id
      * @param session
      * @return
      */
-    @PostMapping(value = ApiConf.getOrderItems, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> getOrderItems(@RequestParam Order order, HttpSession session) {
+    @GetMapping(value = ApiConf.getOrderItems, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> getOrderItems(@PathVariable("id") Long id, HttpSession session) {
         logger.info("获取所有订单列表啦***************************");
-        return orderItemsService.getByOrder(order);
+        return orderItemsService.getByOrderId(id);
     }
 
     /**
@@ -138,8 +139,19 @@ public class OrderController {
         return "";
     }
 
+
     @GetMapping(value = ApiConf.getAllMoney, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> getAllMoney(@RequestParam User user, HttpSession session) {
         return orderService.getAllMoney(user);
+
+
+    /**
+     * 查询订单信息
+     * @param number
+     * @return
+     */
+    @GetMapping(value = ApiConf.order_search, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> user_search(@RequestParam("number") String number) {
+        return orderService.getByNumber(number);
     }
 }

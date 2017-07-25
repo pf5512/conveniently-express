@@ -4,6 +4,8 @@ import com.neng.config.ApiConf;
 import com.neng.pojo.Need;
 import com.neng.pojo.Order;
 import com.neng.pojo.User;
+import com.neng.repository.NeedRepository;
+import com.neng.repository.UserRepository;
 import com.neng.service.inner.NeedService;
 import com.neng.service.inner.OrderService;
 import com.neng.service.inner.UserService;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,14 +40,20 @@ public class AdminController {
     private UserService userService;
     private OrderService orderService;
     private NeedService needService;
+    private UserRepository userRepository;
+    private NeedRepository needRepository;
 
     @Autowired
     public AdminController(UserService userService,
                            OrderService orderService,
-                           NeedService needService){
+                           NeedService needService,
+                           UserRepository userRepository,
+                           NeedRepository needRepository){
         this.userService = userService;
         this.orderService = orderService;
         this.needService = needService;
+        this.userRepository = userRepository;
+        this.needRepository = needRepository;
     }
 
     @GetMapping("/")
@@ -56,7 +65,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "/users",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String users(@PageableDefault(value = 2, sort = { "id" }, direction = Sort.Direction.ASC)Pageable pageable, Model model){
+    public String users(@PageableDefault(value = 5, sort = { "id" }, direction = Sort.Direction.ASC)Pageable pageable, Model model){
 
         Page<User> users = userService.list(pageable);
         PageWrapper<User> page = new PageWrapper<User>(users, ApiConf.users);
@@ -92,6 +101,31 @@ public class AdminController {
     public String changeStatus(@PathVariable("userId") Long userId,@PathVariable("status") Integer status){
         userService.changeStatus(userId, status);
         return "redirect:/" + ApiConf.users;
+    }
+
+    @GetMapping(value = ApiConf.models,produces = MediaType.APPLICATION_JSON_VALUE)
+    public String modelList(Model model){
+        model.addAttribute(ApiConf.view_content, ApiConf.model_info);
+        model.addAttribute(ApiConf.breadCump, ApiConf.infoManagers);
+        return ApiConf.index;
+    }
+
+    @PostMapping(value = ApiConf.user_add, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Transactional
+    public String user_add(User user) {
+        userRepository.save(user);
+        return "redirect:/" + ApiConf.users;
+    }
+
+
+
+    @PostMapping(value = ApiConf.need_add, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Transactional
+    public String need_add(Need need) {
+        User user = userRepository.findOne(9L);
+        need.setUser(user);
+        needRepository.save(need);
+        return "redirect:/" + ApiConf.needs;
     }
 
 }

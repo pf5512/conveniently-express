@@ -10,6 +10,86 @@
     <div class="container-fluid">
 
         <div class="animated fadeIn">
+            <div class="row">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="input-prepend input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i>
+                    </span>
+                                <input id="orderInput" class="form-control" size="16" type="text" placeholder="搜索订单">
+                                <span class="input-group-btn">
+                        <button class="btn btn-info" type="button" th:onclick="'javascript:orderSearch();'" >搜索</button>
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row" id="orderSearchShow" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-align-justify"></i> 搜索到的订单
+                        </div>
+                        <div class="card-block">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>订单编号</th>
+                                        <th>交易时间</th>
+                                        <th>总价格</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td id="number" >Vishnu Serghei</td>
+                                            <td id="tradeTime" >Vishnu Serghei</td>
+                                            <td id="allPrice" >Vishnu Serghei</td>
+                                            <td>
+                                                <span class="badge badge-success" id="status1" style="display: none;"  >已支付</span>
+                                                <span class="badge badge-info" id="status0" style="display: none;" >未支付</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <div >
+                                                    <input type="hidden" id="orderId" name="id" />
+                                                    <a type="button" class="btn btn-primary btn-md"  th:href="@{'/api/student?num='}" >
+                                                        <span class="fa fa-eye"></span>
+                                                        <span class="hidden-md-down" >订单明细</span></a>
+
+                                                </div>
+                                            </td>
+
+                                        </tr>
+
+                                        </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.col-->
+            </div>
+
+        <div id="orderError" style="display: none;" >
+            <div class="col-lg-12">
+                <h1>搜索结果</h1>
+                <div class="card">
+                    <center>
+                        <h2>没有此订单</h2>
+                    </center>
+
+                </div>
+            </div>
+        </div>
+            <br>
+            <br>
+            <br>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -41,7 +121,8 @@
                                 <td class="text-center">
                                     <div >
                                         <input type="hidden" id="studentId" name="id" />
-                                        <a type="button" class="btn btn-primary btn-md"  th:href="@{'/api/student?num='}" >
+                                        <a type="button" class="btn btn-primary btn-md"
+                                           th:onclick="'javascript:orderItemShow(\''+ ${order.id} +'\');'"
                                             <span class="fa fa-eye"></span>
                                             <span class="hidden-md-down" >订单明细</span></a>
 

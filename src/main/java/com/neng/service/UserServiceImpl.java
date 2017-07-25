@@ -1,9 +1,7 @@
 package com.neng.service;
 
 import com.neng.exception.UserUpdateException;
-import com.neng.pojo.Order;
 import com.neng.pojo.User;
-import com.neng.pojo.UserBuilder;
 import com.neng.pojo.config.Api;
 import com.neng.pojo.config.Constant;
 import com.neng.pojo.enumClass.StatusEnum;
@@ -44,9 +42,9 @@ public class UserServiceImpl implements UserService {
         if (CustomValidator.hasEmpty(username, password)) {
             return RespFactory.INSTANCE().paramsError();
         }
-        Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
+        Optional<User> user = userRepository.findByNameAndPassword(username, password);
         if (!user.isPresent()) {
-            if (userRepository.countByUsername(username) < 1) {
+            if (userRepository.countByName(username) < 1) {
                 return new ResponseEntity<>(new Result<String>().api(Api.USER_NOT_EXIST), HttpStatus.OK);
             }
             return new ResponseEntity<>(new Result<String>().api(Api.USER_PASS_ERR), HttpStatus.OK);
@@ -69,11 +67,11 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<?> register(String username, String password) {
         if (CustomValidator.hasEmpty(username, password)) {
             return RespFactory.INSTANCE().paramsError();
-        } else if (userRepository.countByUsername(username) > 0) {
+        } else if (userRepository.countByName(username) > 0) {
             return new ResponseEntity<>(new Result<String>().api(Api.USER_NAME_EXIST), HttpStatus.OK);
         } else {
             User u = new User();
-            u.setUsername(username);
+            u.setName(username);
             u.setPassword(password);
             User user = userRepository.save(u);
 
@@ -153,4 +151,22 @@ public class UserServiceImpl implements UserService {
         Page<User> page = userRepository.findAll(pageable);
         return page;
     }
+
+    @Override
+    public ResponseEntity<?> search(String name) {
+        Result<User> result = new Result<>();
+        if (name == null) {
+            result.api(Api.PARMETER_NOT_EXIT);
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
+        User u = userRepository.findUserByName(name);
+        if (u == null) {
+            result.api(Api.NO_USERS);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        result.api(Api.SUCCESS);
+        result.setData(u);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 }

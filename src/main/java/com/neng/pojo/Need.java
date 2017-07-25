@@ -46,5 +46,7 @@ public class Need implements Serializable {
      */
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_id")
-    private User user;//买家
+    private User user;//发布者
+
+
 }

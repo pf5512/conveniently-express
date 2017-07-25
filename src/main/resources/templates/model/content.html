@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<!-- Main content -->
+<main class="main" th:fragment="copy">
+
+    <div th:replace="shared/breadcrumb :: copy"></div>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-align-justify"></i> 后台管理员添加信息
+                        </div>
+                        <div class="card-block">
+                            <hr>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user">
+                                添加用户
+                            </button>
+                            <hr>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#need">
+                               添加发布需求
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+        </div>
+
+
+
+
+        <div th:include="user/add"></div>
+        <div th:include="need/add"></div>
+    </div>
+    <!-- /.conainer-fluid -->
+</main>
+</body>
+
+</html>

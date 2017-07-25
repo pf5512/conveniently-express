@@ -9,7 +9,12 @@ public interface ApiConf {
     String getUserNumber = "api/v1/getUserNumber"; //获取用户数量
     String getUsers = "api/v1/getUsers"; //获取所有的用户
     String changeUserStatus = "api/v1/user/{userId}/{status}"; //修改用户状态
+
     String getAllMoney = "api/vi/user/getAllMoney";
+
+    String user_add = "api/user"; // 添加用户
+    String user_get = "api/user/{userId}"; // 获取用户信息
+
 
     //-----------------------------NeedController---------------------------
     String saveNeed = "api/v1/saveNeed"; //保存发布的需求
@@ -19,14 +24,16 @@ public interface ApiConf {
     String getNeed = "api/v1/getNeed"; // 获取单个需求详情
     String deleteNeed = "api/v1/deleteNeed"; // 用户删除需求
     String getWeiJieDan = "api/v1/getWeiJieDan";
+    String need_add = "api/need";
 
     //-----------------------------OrderController---------------------------
     String receiveOrder = "api/v1/receiveOrder"; // 接单
     String cancelOrder = "api/v1/cancelOrder"; // 取消接单
     String getOrders = "api/v1/getOrders"; // 获取所有的订单列表
     String getOrdersByUser = "api/v1/getOrdersByUser"; // 获取所有的订单列表
-    String getOrderItems = "api/v1/getOrderItems"; // 获取所有的订单项
+    String getOrderItems = "api/v1/getOrderItems/{id}"; // 获取所有的订单项
     String getOrderItem = "api/v1/getOrderItem"; // 获取单个订单详情
+    String order_search = "api/order"; // 查询订单
     String getWeiZhiFu = "api/v1/getWeiZhiFu";
     String getYiZhiFu = "api/v1/getYiZhiFu";
 
@@ -71,15 +78,18 @@ public interface ApiConf {
     String user_list = "user/list"; //用户列表
     String order_list = "order/list"; //订单列表
     String need_list = "need/list"; //订单列表
+    String model_info = "model/content";
 
     String breadCump = "info";
-    String user = "User";
-    String order = "Order";
-    String need = "Need";
+    String user = "用户管理";
+    String order = "订单管理";
+    String need = "需求管理";
+    String infoManagers = "信息管理";
 
     String users = "users";
     String orders = "orders";
     String needs = "needs";
+    String models = "models";
 
 
     //----------------------------AliPay----------------------------

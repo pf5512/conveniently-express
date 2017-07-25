@@ -53,9 +53,9 @@
                                 <td class="text-center">
                                     <div >
                                         <input type="hidden" id="studentId" name="id" />
-                                        <a th:if="${need.status eq 1}" type="button" class="btn btn-primary btn-sm"  th:href="@{'/api/v1/need/' + ${need.id}}">
-                                            <span class="fa fa-pencil"></span>
-                                            <span class="hidden-md-down"   >查看详情</span>
+                                        <a th:if="${need.status eq 1}" type="button" class="btn btn-primary btn-sm"  th:onclick="'javascript:userShow(\''+ ${need.user.id} +'\');'">
+                                            <span class="fa fa-eye"></span>
+                                            <span class="hidden-md-down"   >查看发布用户</span>
                                         </a>
                                     </div>
                                 </td>
@@ -68,6 +68,7 @@
                         </div>
 
                         <div th:include="shared/pagination"></div>
+
                     </div>
                 </div>
             </div>
@@ -77,6 +78,7 @@
     </div>
     <!-- /.conainer-fluid -->
 </main>
+
 </body>
 
 </html>
