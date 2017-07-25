@@ -35,4 +35,6 @@ public interface OrderService {
     ResponseEntity<?> getOrders();
 
     Page<Order> list(Pageable pageable);
+
+    ResponseEntity<?> getAllMoney(User user);
 }

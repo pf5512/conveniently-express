@@ -9,7 +9,7 @@ public interface ApiConf {
     String getUserNumber = "api/v1/getUserNumber"; //获取用户数量
     String getUsers = "api/v1/getUsers"; //获取所有的用户
     String changeUserStatus = "api/v1/user/{userId}/{status}"; //修改用户状态
-
+    String getAllMoney = "api/vi/user/getAllMoney";
 
     //-----------------------------NeedController---------------------------
     String saveNeed = "api/v1/saveNeed"; //保存发布的需求

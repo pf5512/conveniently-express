@@ -137,4 +137,9 @@ public class OrderController {
         model.addAttribute("orders", orders);
         return "";
     }
+
+    @GetMapping(value = ApiConf.getAllMoney, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> getAllMoney(@RequestParam User user, HttpSession session) {
+        return orderService.getAllMoney(user);
+    }
 }
