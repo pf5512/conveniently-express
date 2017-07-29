@@ -143,7 +143,7 @@ public class OrderController {
     @GetMapping(value = ApiConf.getAllMoney, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> getAllMoney(@RequestParam User user, HttpSession session) {
         return orderService.getAllMoney(user);
-
+    }
 
     /**
      * 查询订单信息
