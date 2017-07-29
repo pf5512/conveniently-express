@@ -166,4 +166,17 @@ public class OrderServiceImpl implements OrderService {
         Page<Order> page = orderRepository.findAll(pageable);
         return page;
     }
+
+    @Override
+    public ResponseEntity<?> getAllMoney(User user) {
+        List<Order> orders = orderRepository.findByUser(user);
+        double a = 0;
+        for (int i = 0; i < orders.size(); i++) {
+            a += orders.get(i).getNeed().getMoney();
+        }
+        Result<Double> result = new Result<>();
+        result.api(Api.SUCCESS);
+        result.setData(a);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

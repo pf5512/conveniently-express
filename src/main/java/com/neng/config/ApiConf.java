@@ -9,9 +9,11 @@ public interface ApiConf {
     String getUserNumber = "api/v1/getUserNumber"; //获取用户数量
     String getUsers = "api/v1/getUsers"; //获取所有的用户
     String changeUserStatus = "api/v1/user/{userId}/{status}"; //修改用户状态
+
+    String getAllMoney = "api/vi/user/getAllMoney";
+
     String user_add = "api/user"; // 添加用户
     String user_get = "api/user/{userId}"; // 获取用户信息
-
 
 
     //-----------------------------NeedController---------------------------
