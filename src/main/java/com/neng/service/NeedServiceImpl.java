@@ -7,7 +7,9 @@ import com.neng.pojo.config.Api;
 import com.neng.repository.NeedRepository;
 import com.neng.repository.UserRepository;
 import com.neng.service.inner.NeedService;
+import com.neng.utils.OssConstants;
 import com.neng.utils.Result;
+import com.neng.utils.UploadOSSUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +18,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -68,11 +74,26 @@ public class NeedServiceImpl implements NeedService {
      * @return
      */
     @Override
-    public ResponseEntity<?> saveAndFlushNeed(Long userId, Need need) {
+    public ResponseEntity<?> saveAndFlushNeed(Long userId, Need need,MultipartFile file) {
         if (need == null) {
             Result<Need> result = new Result<>();
             result.api(Api.PARMETER_NOT_EXIT);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        String newFileName = "需求/" + need.getId() + "/" + df.format(new Date()) + "_"
+                + file.getOriginalFilename();
+        if (file.getSize() != 0) {
+            new UploadOSSUtil();
+            try {
+                UploadOSSUtil.uploadImgAliyun(file.getInputStream(), newFileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            need.setGoodPic(OssConstants.THIRD_PARTY_PIC_SAVEURL + newFileName);
+        }else {
+            need.setGoodPic(null);
         }
         User u = userRepository.findOne(userId);
         need.setUser(u);

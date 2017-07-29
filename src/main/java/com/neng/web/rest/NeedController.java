@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -42,9 +43,9 @@ public class NeedController {
      * @return
      */
     @PostMapping(value = ApiConf.saveNeed, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> saveNeed(Long userId, Need need) {
+    public ResponseEntity<?> saveNeed(Long userId, Need need,@RequestParam("file") MultipartFile file) {
         logger.info("save need***************************");
-        return needService.saveAndFlushNeed(userId, need);
+        return needService.saveAndFlushNeed(userId, need,file);
     }
 
 

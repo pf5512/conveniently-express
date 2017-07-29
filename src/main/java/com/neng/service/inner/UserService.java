@@ -4,6 +4,7 @@ import com.neng.pojo.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,4 +34,6 @@ public interface UserService {
     Page<User> list(Pageable pageable);
 
     ResponseEntity<?> search(String name);
+
+    void uploadAvatar(MultipartFile file,User user);
 }

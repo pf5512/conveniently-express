@@ -7,18 +7,23 @@ import com.neng.pojo.config.Constant;
 import com.neng.pojo.enumClass.StatusEnum;
 import com.neng.repository.UserRepository;
 import com.neng.service.inner.UserService;
-import com.neng.utils.CustomValidator;
-import com.neng.utils.RespFactory;
-import com.neng.utils.Result;
+import com.neng.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +32,7 @@ import java.util.Optional;
  */
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserDetailsService,UserService {
 
     private UserRepository userRepository;
 
@@ -169,4 +174,30 @@ public class UserServiceImpl implements UserService {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userRepository.findUserByName(s);
+    }
+
+
+    @Override
+    public void uploadAvatar(MultipartFile file,User user) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        String newFileName = "用户头像/" + df.format(new Date()) + "_"
+                + file.getOriginalFilename();
+        if (file.getSize() != 0) {
+            new UploadOSSUtil();
+            try {
+                UploadOSSUtil.uploadImgAliyun(file.getInputStream(), newFileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            user.setHeadPic(OssConstants.THIRD_PARTY_PIC_SAVEURL + newFileName);
+            userRepository.save(user);
+        }else {
+            user.setHeadPic(null);
+            userRepository.save(user);
+        }
+
+    }
 }
