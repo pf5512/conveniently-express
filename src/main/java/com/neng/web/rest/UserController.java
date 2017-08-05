@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpSession;
 
 /**
@@ -51,9 +53,10 @@ public class UserController {
      * @return
      */
     @PostMapping(value = ApiConf.register, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> register(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<?> register(@RequestParam String username, @RequestParam String password,
+                                      @RequestParam("file") MultipartFile file) {
         logger.info("注册进来啦***************************");
-        return userService.register(username, password);
+        return userService.register(username, password,file);
     }
 
     /**

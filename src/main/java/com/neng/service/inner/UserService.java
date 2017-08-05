@@ -19,7 +19,6 @@ public interface UserService {
 
     ResponseEntity<?> auth(String username,String password); //获取token
 
-    ResponseEntity<?> register(String username,String password); //用户注册
 
     ResponseEntity<?> getOne(long userId);
 
@@ -36,4 +35,6 @@ public interface UserService {
     ResponseEntity<?> search(String name);
 
     void uploadAvatar(MultipartFile file,User user);
+
+    ResponseEntity<?> register(String username, String password, MultipartFile file);//用户注册
 }

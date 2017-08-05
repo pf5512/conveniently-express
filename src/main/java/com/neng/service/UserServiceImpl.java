@@ -1,6 +1,7 @@
 package com.neng.service;
 
 import com.neng.exception.UserUpdateException;
+import com.neng.pojo.Need;
 import com.neng.pojo.User;
 import com.neng.pojo.config.Api;
 import com.neng.pojo.config.Constant;
@@ -66,25 +67,39 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         return null;
     }
 
+
     @Override
-    public ResponseEntity<?> register(String username, String password) {
+    public ResponseEntity<?> register(String username, String password, MultipartFile file) {
+        Result<User> result = new Result<>();
         if (CustomValidator.hasEmpty(username, password)) {
             return RespFactory.INSTANCE().paramsError();
         } else if (userRepository.countByName(username) > 0) {
             return new ResponseEntity<>(new Result<String>().api(Api.USER_NAME_EXIST), HttpStatus.OK);
         } else {
-            User u = new User();
-            u.setName(username);
-            u.setPassword(password);
-            User user = userRepository.save(u);
-
-            if (user == null || user.getId() == 0) {
-                throw new UserUpdateException();
+            if (file.isEmpty()) {
+                System.out.println(file.getOriginalFilename() + "sadfasdfasdfasdf");
+                result.api(Api.PARMETER_NOT_EXIT);
+                return new ResponseEntity<>(result, HttpStatus.OK);
             }
 
-            Result<User> result = new Result<>();
-            result.api(Api.SUCCESS);
-            result.setData(user);
+            try {
+                byte[] bytes = file.getBytes();
+                String retuen_url = new UploadFile().upload(bytes, file.getOriginalFilename());
+                User u = new User();
+                u.setName(username);
+                u.setPassword(password);
+                u.setHeadPic(retuen_url);
+                User user = userRepository.save(u);
+                if (user == null || user.getId() == 0) {
+                    throw new UserUpdateException();
+                }
+
+                result.api(Api.SUCCESS);
+                result.setData(user);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("成功上传");
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
     }
@@ -198,4 +213,6 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         }
 
     }
+
+
 }
