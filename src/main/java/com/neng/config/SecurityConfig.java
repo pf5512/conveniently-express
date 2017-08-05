@@ -26,7 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .anyRequest()
-                .permitAll();
+                .permitAll()
+                .and()
+        .cors().disable();
 //                .and()
 //                .formLogin()   //基于 Form 表单登录验证
 //                .loginPage("/login");// 自定义登录界面

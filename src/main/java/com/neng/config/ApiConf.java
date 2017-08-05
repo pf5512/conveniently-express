@@ -85,7 +85,7 @@ public interface ApiConf {
     String order_list = "order/list"; //订单列表
     String need_list = "need/list"; //订单列表
     String model_info = "model/content";
-    String advertise_list = "advertise/content"; //广告管理
+    String advertise_list = "advertise/list"; //广告管理
 
     String breadCump = "info";
     String user = "用户管理";
