@@ -17,8 +17,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Date;
 
 /**
  * Created by nengneng on 2017/8/5.
@@ -71,9 +75,17 @@ public class AdvertiseController {
      */
     @PostMapping(value = ApiConf.saveAdvertise, produces = MediaType.APPLICATION_JSON_VALUE)
     public String add(Advertise advertise) {
+        advertise.setCreateTime(new Date());
         advertiseRepository.save(advertise);
         return "redirect:/" + ApiConf.listAdvertises;
 
+    }
+
+
+    @GetMapping(value = ApiConf.deleteAdvertise, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String delete(@PathVariable("id") Long id) {
+        advertiseRepository.delete(id);
+        return "redirect:/" + ApiConf.listAdvertises;
     }
 
 }

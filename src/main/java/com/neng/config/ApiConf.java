@@ -63,6 +63,7 @@ public interface ApiConf {
     String updateAdvertise = "api/v1/advertise"; // 更新广告
     String listAdvertises = "api/v1/advertise"; // 广告列表
     String getAdvertise = "api/v1/advertise/{id}"; // 获得单个广告
+    String deleteAdvertise = "api/v1/advertise/{id}"; // 获得单个广告
 
 
     //-----------------------------客服相关---------------------------

@@ -1,5 +1,7 @@
 package com.neng.pojo;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.Date;
 /**
  * Created by nengneng on 2017/8/5.
  */
+@Data
 @Entity
 @Table(name = "t_picture")
 public class Picture implements Serializable {

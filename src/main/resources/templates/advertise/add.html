@@ -8,7 +8,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form th:action="@{/api/addAdvertise}" method="post" >
+                            <form th:action="@{/api/v1/advertise}" method="post" >
 
                                 <div class="form-group">
                                     <label for="title" class="control-label">广告标题:</label>
@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label  class="control-label">广告内容:</label>
-                                   <textarea name="content"></textarea>
+                                   <textarea class="form-control" name="content"></textarea>
                                 </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>

@@ -33,25 +33,16 @@
                                 <td th:text="${advertise.title}">Vishnu Serghei</td>
                                 <td th:text="${advertise.content}">2012/01/01</td>
                                 <td th:text="${advertise.createTime}">2012/01/01</td>
-                                <td ></td>
-
-                                <!--<td>-->
-                                    <!--<span class="badge badge-success" th:if="${advertise.status eq 1}" >已激活</span>-->
-                                    <!--<span class="badge badge-danger" th:if="${advertise.status eq 0}" >已冻结</span>-->
-                                <!--</td>-->
-                                <!--<td class="text-center">-->
-                                    <!--<div >-->
-                                        <!--<input type="hidden" id="studentId" name="id" />-->
-                                        <!--<a type="button" th:class="${advertise.status} eq 0 ? 'btn btn-primary btn-md':'btn btn-danger btn-md'" class="btn btn-primary btn-md"  th:href="@{'/api/v1/user/' + ${user.id} + '/' + ${user.status} }">-->
-                                            <!--<span class="hidden-md-down" th:if="${advertise.status eq 1}"  >冻结</span>-->
-                                            <!--<span class="hidden-md-down" th:if="${advertise.status eq 0}"  >激活</span></a>-->
-                                        <!--&lt;!&ndash;<a type="button" class="btn btn-danger btn-md"  th:href="${'/api/v1/user/'+ '/student/'} ">&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<span class="fa fa-remove"></span>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<span class="hidden-md-down">删除</span></a>&ndash;&gt;-->
+                                <td class="text-center">
+                                    <div >
+                                        <input type="hidden" id="studentId" name="id" />
+                                        <a type="button" class="btn btn-danger btn-md"  th:href="${'/api/v1/advertise/'+ advertise.id} ">
+                                            <span class="fa fa-remove"></span>
+                                            <span class="hidden-md-down">删除</span></a>
 
 
-                                    <!--</div>-->
-                                <!--</td>-->
+                                    </div>
+                                </td>
 
                             </tr>
 

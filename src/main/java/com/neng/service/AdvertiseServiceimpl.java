@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -73,6 +74,7 @@ public class AdvertiseServiceimpl implements AdvertiseService {
             result.api(Api.PARMETER_NOT_EXIT);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
+
         advertise = advertiseRepository.save(advertise);
         result.setData(advertise);
         result.api(Api.SUCCESS);
@@ -102,6 +104,7 @@ public class AdvertiseServiceimpl implements AdvertiseService {
         advertise = advertiseRepository.findOne(advertiseId);
         advertise.setContent(content);
         advertise.setTitle(title);
+        advertise.setCreateTime(new Date());
         Advertise advertiseDate = advertiseRepository.saveAndFlush(advertise);
         result.setData(advertiseDate);
         result.api(Api.SUCCESS);

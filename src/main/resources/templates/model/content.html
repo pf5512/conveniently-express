@@ -22,7 +22,11 @@
                             </button>
                             <hr>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#need">
-                               添加发布需求
+                               发布需求
+                            </button>
+                            <hr>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#advertise">
+                                发布广告
                             </button>
 
                         </div>
@@ -38,6 +42,7 @@
 
         <div th:include="user/add"></div>
         <div th:include="need/add"></div>
+        <div th:include="advertise/add"></div>
     </div>
     <!-- /.conainer-fluid -->
 </main>
