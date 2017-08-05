@@ -9,6 +9,7 @@ import com.neng.repository.UserRepository;
 import com.neng.service.inner.NeedService;
 import com.neng.utils.OssConstants;
 import com.neng.utils.Result;
+import com.neng.utils.UploadFile;
 import com.neng.utils.UploadOSSUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,32 +76,32 @@ public class NeedServiceImpl implements NeedService {
      */
     @Override
     public ResponseEntity<?> saveAndFlushNeed(Long userId, Need need,MultipartFile file) {
+        Result<Need> result = new Result<>();
         if (need == null) {
-            Result<Need> result = new Result<>();
+
             result.api(Api.PARMETER_NOT_EXIT);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-        String newFileName = "需求/" + need.getId() + "/" + df.format(new Date()) + "_"
-                + file.getOriginalFilename();
-        if (file.getSize() != 0) {
-            new UploadOSSUtil();
-            try {
-                UploadOSSUtil.uploadImgAliyun(file.getInputStream(), newFileName);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            need.setGoodPic(OssConstants.THIRD_PARTY_PIC_SAVEURL + newFileName);
-        }else {
-            need.setGoodPic(null);
+        if (file.isEmpty()) {
+            System.out.println(file.getOriginalFilename() + "sadfasdfasdfasdf");
+            result.api(Api.PARMETER_NOT_EXIT);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
-        User u = userRepository.findOne(userId);
-        need.setUser(u);
-        Need needDate = needRepository.saveAndFlush(need);
-        Result<Need> result = new Result<>();
-        result.api(Api.SUCCESS);
-        result.setData(needDate);
+
+        try {
+            byte[] bytes = file.getBytes();
+            String retuen_url = new UploadFile().upload(bytes, file.getOriginalFilename());
+            need.setGoodPic(retuen_url);
+            User u = userRepository.findOne(userId);
+            need.setUser(u);
+            Need needDate = needRepository.saveAndFlush(need);
+            result.api(Api.SUCCESS);
+            result.setData(needDate);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("成功上传");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

@@ -58,6 +58,12 @@ public interface ApiConf {
     String updateHomeAddress = "api/v1/updateAddress"; // 更新地址
     String deleteHomeAddress = "api/v1/deleteAddress"; // 删除地址
 
+    //-----------------------------AdvertiseController---------------------------
+    String saveAdvertise = "api/v1/advertise"; // 保存广告
+    String updateAdvertise = "api/v1/advertise"; // 更新广告
+    String listAdvertises = "api/v1/advertise"; // 广告列表
+    String getAdvertise = "api/v1/advertise/{id}"; // 获得单个广告
+
 
     //-----------------------------客服相关---------------------------
     String getMessage = "api/v1/getMessage"; //获取所有任务
@@ -79,14 +85,17 @@ public interface ApiConf {
     String order_list = "order/list"; //订单列表
     String need_list = "need/list"; //订单列表
     String model_info = "model/content";
+    String advertise_list = "advertise/content"; //广告管理
 
     String breadCump = "info";
     String user = "用户管理";
     String order = "订单管理";
     String need = "需求管理";
+    String advertise = "广告管理";
     String infoManagers = "信息管理";
 
     String users = "users";
+    String advertises = "advertises";
     String orders = "orders";
     String needs = "needs";
     String models = "models";
