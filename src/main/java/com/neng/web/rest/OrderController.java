@@ -41,13 +41,13 @@ public class OrderController {
     /**
      * 接单
      *
-     * @param order
+     * @param
      * @return
      */
     @PostMapping(value = ApiConf.receiveOrder, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> receiveOrder(Order order, User user, Need need) {
+    public ResponseEntity<?> receiveOrder(Long userId, Long needId,int status) {
         logger.info("接单啦***************************");
-        return orderService.saveAndFlushOrder(order,user,need);
+        return orderService.saveAndFlushOrder(userId,needId,status);
     }
 
     /**

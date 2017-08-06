@@ -5,6 +5,7 @@ import com.neng.pojo.Order;
 import com.neng.pojo.OrderItems;
 import com.neng.pojo.User;
 import com.neng.pojo.config.Api;
+import com.neng.repository.NeedRepository;
 import com.neng.repository.OrderItemsRepository;
 import com.neng.repository.OrderRepository;
 import com.neng.repository.UserRepository;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -38,14 +40,17 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
     private OrderItemsRepository orderItemsRepository;
     private UserRepository userRepository;
+    private NeedRepository needRepository;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository,
                             OrderItemsRepository orderItemsRepository,
-                            UserRepository userRepository) {
+                            UserRepository userRepository,
+                            NeedRepository needRepository) {
         this.orderRepository = orderRepository;
         this.orderItemsRepository = orderItemsRepository;
         this.userRepository = userRepository;
+        this.needRepository = needRepository;
     }
 
     /**
@@ -66,13 +71,21 @@ public class OrderServiceImpl implements OrderService {
     /**
      * 保存订单
      *
-     * @param order
+     * @param
      * @return
      */
     @Override
-    public ResponseEntity<?> saveAndFlushOrder(Order order, User user, Need need) {
+    public ResponseEntity<?> saveAndFlushOrder(Long userId, Long needId,int status) {
+        User user = userRepository.findOne(userId);
+        Need need = needRepository.findOne(needId);
+        need.setStatus(status);
+        Need needDate = needRepository.saveAndFlush(need);
         order.setUser(user);
-        order.setNeed(need);
+        order.setNeed(needDate);
+        order.setCreateTime(new Date());
+        Long number = System.currentTimeMillis();
+        order.setNumber("" + number);
+
         Order orderDate = orderRepository.save(order);
 //        saveOrderItems(userId, order, orderItems);
         Result<Order> result = new Result<>();
