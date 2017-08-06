@@ -1,6 +1,7 @@
 package com.neng.web.rest;
 
 import com.neng.config.ApiConf;
+import com.neng.pojo.Need;
 import com.neng.pojo.Order;
 import com.neng.pojo.OrderItems;
 import com.neng.pojo.User;
@@ -41,14 +42,12 @@ public class OrderController {
      * 接单
      *
      * @param order
-     * @param
-     * @param session
      * @return
      */
     @PostMapping(value = ApiConf.receiveOrder, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> receiveOrder(@RequestParam Order order, HttpSession session) {
+    public ResponseEntity<?> receiveOrder(Order order, User user, Need need) {
         logger.info("接单啦***************************");
-        return orderService.saveAndFlushOrder(order.getUser().getId(), order);
+        return orderService.saveAndFlushOrder(order,user,need);
     }
 
     /**
