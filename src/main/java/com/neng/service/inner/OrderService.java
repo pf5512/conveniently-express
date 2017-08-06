@@ -18,7 +18,7 @@ public interface OrderService {
 
     ResponseEntity<?> getOrdersByUser(User user);
 
-    ResponseEntity<?> saveAndFlushOrder(Long userId, Order order, Set<OrderItems> orderItems);
+    ResponseEntity<?> saveAndFlushOrder(Long userId, Order order);
 
     ResponseEntity<?> getOne(long orderId);
 

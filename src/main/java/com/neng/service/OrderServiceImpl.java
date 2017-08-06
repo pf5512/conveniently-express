@@ -70,9 +70,13 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public ResponseEntity<?> saveAndFlushOrder(Long userId, Order order, Set<OrderItems> orderItems) {
-        saveOrderItems(userId, order, orderItems);
+    public ResponseEntity<?> saveAndFlushOrder(Long userId, Order order) {
+//        saveOrderItems(userId, order, orderItems);
+        User user = userRepository.findOne(userId);
+        order.setUser(user);
+        Order o = orderRepository.save(order);
         Result<Order> result = new Result<>();
+        result.setData(o);
         result.api(Api.SUCCESS);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
